@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customLabels>
+        <label>Ascending</label>
+        <name>SB_OT_SORT_ASCENDING</name>
+    </customLabels>
+    <customLabels>
+        <label>Descending</label>
+        <name>SB_OT_SORT_DESCENDING</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 0: 国 1: 国コード, 2: 郵便番号, 3: 都道府県, 4: 都道府県コード, 5: 市区郡, 6: 町名・番地 --></label>
+        <name>SB_Ot_AddressFormat</name>
+    </customLabels>
+    <customLabels>
+        <label>Organization Structure DX</label>
+        <name>SB_Ot_AppTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Card I Own</label>
+        <name>SB_Ot_Cap_CardIOwn</name>
+    </customLabels>
+    <customLabels>
+        <label>Format</label>
+        <name>SB_Ot_Conf_DisplayModeLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Field for Department Name</label>
+        <name>SB_Ot_Conf_DivisionField</name>
+    </customLabels>
+    <customLabels>
+        <label>Field for Email</label>
+        <name>SB_Ot_Conf_EmailField</name>
+    </customLabels>
+    <customLabels>
+        <label>Maximum Number of Reccords in Target Object</label>
+        <name>SB_Ot_Conf_MaxRecsDescript</name>
+    </customLabels>
+    <customLabels>
+        <label>Maximum Number of Reccords</label>
+        <name>SB_Ot_Conf_MaxRecsLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Field for Organization Name</label>
+        <name>SB_Ot_Conf_OrganizationField</name>
+    </customLabels>
+    <customLabels>
+        <label>Field for Title</label>
+        <name>SB_Ot_Conf_TitleField</name>
+    </customLabels>
+    <customLabels>
+        <label>Contact Role</label>
+        <name>SB_Ot_ContactRole</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 期日の範囲の年のWHERE句 --></label>
+        <name>SB_Ot_DateRangeCondition_CY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 期日の範囲の年度のWHERE句 --></label>
+        <name>SB_Ot_DateRangeCondition_FY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 名刺用の期日の範囲の年のWHERE句 --></label>
+        <name>SB_Ot_DateRangeCondition_NC_CY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 名刺用の期日の範囲の年度のWHERE句 --></label>
+        <name>SB_Ot_DateRangeCondition_NC_FY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 名刺用の期日の範囲の年のWHERE句 --></label>
+        <name>SB_Ot_DateRangeCondition_NC_THISCY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 名刺用の期日の範囲の年度のWHERE句 --></label>
+        <name>SB_Ot_DateRangeCondition_NC_THISFY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 期日の範囲の年のWHERE句 --></label>
+        <name>SB_Ot_DateRangeCondition_THISCY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 期日の範囲の年度のWHERE句 --></label>
+        <name>SB_Ot_DateRangeCondition_THISFY</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 部署項目の正規表現分割方法の正規表現 --></label>
+        <name>SB_Ot_DeptParserRegex</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 部署項目の空白等分割方法の正規表現 --></label>
+        <name>SB_Ot_DeptParserSeparaterRegex</name>
+    </customLabels>
+    <customLabels>
+        <label>Excess Part by Comparison</label>
+        <name>SB_Ot_DeptParser_Comparision</name>
+    </customLabels>
+    <customLabels>
+        <label>New Line</label>
+        <name>SB_Ot_DeptParser_NewLine</name>
+    </customLabels>
+    <customLabels>
+        <label>Not Divide</label>
+        <name>SB_Ot_DeptParser_NotParse</name>
+    </customLabels>
+    <customLabels>
+        <label>Regular Expression</label>
+        <name>SB_Ot_DeptParser_Regex</name>
+    </customLabels>
+    <customLabels>
+        <label>Separator Character</label>
+        <name>SB_Ot_DeptParser_Space</name>
+    </customLabels>
+    <customLabels>
+        <label>Grid</label>
+        <name>SB_Ot_Grid</name>
+    </customLabels>
+    <customLabels>
+        <label>Organization - {0}</label>
+        <name>SB_Ot_GridFirstLabelFormat</name>
+    </customLabels>
+    <customLabels>
+        <label>Reference to the Latest Business Card</label>
+        <name>SB_Ot_HaveLatestNameCardReference</name>
+    </customLabels>
+    <customLabels>
+        <label>Reference to Business Card</label>
+        <name>SB_Ot_HaveNameCardReference</name>
+    </customLabels>
+    <customLabels>
+        <label>Reference to the Latest Business Card without Job Change</label>
+        <name>SB_Ot_HaveNoChangeLatestNameCardReference</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 所有者のフォーマット --></label>
+        <name>SB_Ot_LabelOwnerFormat</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- オブジェクト名のフォーマット --></label>
+        <name>SB_Ot_LabelSObjectFormat</name>
+    </customLabels>
+    <customLabels>
+        <label>Last Modified Date</label>
+        <name>SB_Ot_LastModifiedDate</name>
+    </customLabels>
+    <customLabels>
+        <label>Latest Business Cards</label>
+        <name>SB_Ot_LatestNameCards</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 地理位置情報項目の表示形式 --></label>
+        <name>SB_Ot_LocationFormat</name>
+    </customLabels>
+    <customLabels>
+        <label>Sort Order</label>
+        <name>SB_Ot_MENU_ORDER</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 地理位置情報項目のリンク先 --></label>
+        <name>SB_Ot_MapUrlFormat</name>
+    </customLabels>
+    <customLabels>
+        <label>There&apos;&apos;s no {1} record of {0}</label>
+        <name>SB_Ot_Msg_NoAltRecord</name>
+    </customLabels>
+    <customLabels>
+        <label>There is no record to match the  conditions.</label>
+        <name>SB_Ot_Msg_NoAvailableRecords</name>
+    </customLabels>
+    <customLabels>
+        <label>There&apos;&apos;s no {1} record specified as &apos;&apos;{0}&apos;&apos;.</label>
+        <name>SB_Ot_Msg_NoReferenceRecord</name>
+    </customLabels>
+    <customLabels>
+        <label>Cannot process because there is no &apos;&apos;{0}&apos;&apos; value.</label>
+        <name>SB_Ot_Msg_ValueIsNull</name>
+    </customLabels>
+    <customLabels>
+        <label>Latest Business Cards without Job Change</label>
+        <name>SB_Ot_NoChangeLatestCards</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 古い名刺へのリンクを示すための書式 --></label>
+        <name>SB_Ot_OldNameCardLinkFormat</name>
+    </customLabels>
+    <customLabels>
+        <label>Active Users</label>
+        <name>SB_Ot_OnlyActiveUsers</name>
+    </customLabels>
+    <customLabels>
+        <label>Active Users of Same Organization</label>
+        <name>SB_Ot_OnlySameOrgActiveUsers</name>
+    </customLabels>
+    <customLabels>
+        <label>Users of Same Organization</label>
+        <name>SB_Ot_OnlySameOrgUsers</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 組織名と部署のフォーマット --></label>
+        <name>SB_Ot_OrgDeptLabelFormat</name>
+    </customLabels>
+    <customLabels>
+        <label>Number of Owninig Records</label>
+        <name>SB_Ot_OwnerRecordCount</name>
+    </customLabels>
+    <customLabels>
+        <label>Owners of Contacts</label>
+        <name>SB_Ot_OwnersAppTitle</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 個人取引先のルートに表示する内容,0はレコードタイプ名 --></label>
+        <name>SB_Ot_PersonalAccountRootLabel</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- レコード詳細へのURL --></label>
+        <name>SB_Ot_RecordDetailUrlFormat</name>
+    </customLabels>
+    <customLabels>
+        <label>{0} {1} {2} invalid</label>
+        <name>SB_Ot_Text_Invalid3</name>
+    </customLabels>
+    <customLabels>
+        <label>--None--</label>
+        <name>SB_Ot_Text_None</name>
+    </customLabels>
+    <customLabels>
+        <label>No Account</label>
+        <name>SB_Ot_Text_NotHaveAccount</name>
+    </customLabels>
+    <customLabels>
+        <label>Record</label>
+        <name>SB_Ot_Text_SObjectColumnTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Current and Previous 2 FY</label>
+        <name>SB_Ot_ThisAndLast2FiscalYear</name>
+    </customLabels>
+    <customLabels>
+        <label>Current and Previous 2 CY</label>
+        <name>SB_Ot_ThisAndLast2Year</name>
+    </customLabels>
+    <customLabels>
+        <label>Current and Previous FY</label>
+        <name>SB_Ot_ThisAndLastFiscalYear</name>
+    </customLabels>
+    <customLabels>
+        <label>Current and Previous CY</label>
+        <name>SB_Ot_ThisAndLastYear</name>
+    </customLabels>
+    <customLabels>
+        <label>Current FY</label>
+        <name>SB_Ot_ThisFiscalYear</name>
+    </customLabels>
+    <customLabels>
+        <label>Current CY</label>
+        <name>SB_Ot_ThisYear</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 役職の順位 --></label>
+        <name>SB_Ot_TitleOrder</name>
+    </customLabels>
+    <customLabels>
+        <label>Tree</label>
+        <name>SB_Ot_Tree</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Treeでの選択中のレコードの識別子 --></label>
+        <name>SB_Ot_TreeSelectedRecordMark</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Treeでの自分のレコードの識別子 --></label>
+        <name>SB_Ot_TreeYourRecordMark</name>
+    </customLabels>
+    <customLabels>
+        <label>Department</label>
+        <name>SB_Ot_USER_DEPARTMENT</name>
+    </customLabels>
+    <customLabels>
+        <label>Name</label>
+        <name>SB_Ot_USER_NAME</name>
+    </customLabels>
+    <customLabels>
+        <label>Current and Previous {0} FY</label>
+        <name>SB_Ot_WithinFiscalYears</name>
+    </customLabels>
+    <customLabels>
+        <label>Current and Previous {0} CY</label>
+        <name>SB_Ot_WithinYears</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SB_Oto_DigestDateFormat --></label>
+        <name>SB_Oto_DigestFormat</name>
+    </customLabels>
+</Translations>

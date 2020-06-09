@@ -1,0 +1,45 @@
+<!--
+/**
+ *  sb_oto_ownerListItem.html
+ *
+ *  @author sawano
+ *  @Version 1 2019.11.xx v1.1
+ *
+ */
+-->
+<template>
+  <lightning-layout vertical-align="center">
+    <lightning-layout-item>
+      <a href="#" onclick={handleClick}>
+        <template if:true={enableImg}>
+          <img src={user.photoUrl} alt={user.alias} />
+        </template>
+        <template if:false={enableImg}>
+          <span class="slds-avatar slds-avatar_profile-image-large"></span>
+          <!-- <lightning-icon icon-name="action:user" size="medium" alternative-text={user.alias}></lightning-icon> -->
+        </template>
+      </a>
+    </lightning-layout-item>
+    <lightning-layout-item padding="around-small">
+      <a href="#" onclick={handleClick} title={user.recordCount}><p style="font-size: 1.1em;">{user.name}</p></a>
+      <p>{user.deptTitle}</p>
+      <template for:each={user.items} for:item="item">
+        <template if:true={item.email}>
+          <p key={item.value}><lightning-formatted-email value={item.value}></lightning-formatted-email></p>
+        </template>
+        <template if:true={item.phone}>
+          <p key={item.value}><lightning-formatted-phone value={item.value}></lightning-formatted-phone></p>
+        </template>
+        <template if:true={item.url}>
+          <p key={item.value}><lightning-formatted-url value={item.value}></lightning-formatted-url></p>
+        </template>
+        <template if:true={item.other}>
+          <p key={item.value}>{item.value}</p>
+        </template>
+      </template>
+      <template if:true={showdate}>
+        <p >{label.lastModifiedDate}:&nbsp;<a href="#" onclick={handleDateClick} title={user.recordLabel}>{user.lastModifiedDate}</a></p>
+      </template>
+    </lightning-layout-item>
+  </lightning-layout>
+</template>

@@ -1,0 +1,37 @@
+<!--
+
+     SB_Ot_CmpLauncher.page
+
+         LEXで URLで起動させるため、IDを受けてVFの中にコンポーネントを展開する。
+  ボタンのURLの例 /apex/OrgTreeCmp__SB_Ot_CmpLauncher?id={!Account.Id}&app=ot
+
+  Copyright (C) 2016 SunBridge Inc. All Rights Reserved.
+
+   @author sawano
+   @Version 1      2016.10.xx
+   @Version 2      2017.10.xx  v1.21 for conde scan
+
+-->
+<apex:page controller="SB_Ot_CmpLauncherController" showHeader="true" sidebar="true">
+  <apex:pageMessages />
+  <apex:includeLightning />
+
+  <div class="slds">
+    <div id="lt_comp" />
+  </div>
+
+  <script>
+    $Lightning.use("{!JSENCODE(namespace_x)}" + "SB_Ot_OrgTreeApp", function() {
+      $Lightning.createComponent("{!JSENCODE(namespace_x)}" + "{!JSENCODE(component)}",
+      {
+        recordId : "{!targetId}",
+        lightningOut: true,
+        retUrl: "{!JSENCODE(retUrl)}"
+      },
+      "lt_comp",
+      function(cmp) {
+        // do some stuff
+      });
+    });
+  </script>
+</apex:page>

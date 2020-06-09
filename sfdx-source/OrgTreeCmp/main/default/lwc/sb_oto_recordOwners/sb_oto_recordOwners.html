@@ -1,0 +1,61 @@
+<!--
+/**
+ *  sb_oto_recordOwners.html
+ *
+ *  @author sawano
+ *  @Version 1 2019.11.xx
+ *
+ */
+ -->
+ <template>
+  <lightning-card title={appTitle} icon-name="standard:user">
+    <template if:true={showMenu}>
+      <lightning-button-menu slot="actions" label="" alternative-text={label.label_menu_order} variant="border-filled"
+            icon-name="utility:sort" onselect={handleSortKeySelect} menu-alignment="right">
+        <lightning-menu-item value="name" label={label.label_name} checked={sortName}></lightning-menu-item>
+        <lightning-menu-item value="department" label={label.label_dept} checked={sortDept}></lightning-menu-item>
+        <lightning-menu-item value="lastDate" label={label.label_lastmodifieddate} checked={sortLastDate}></lightning-menu-item>
+        <lightning-menu-item value="count" label={label.label_recordCount} checked={sortRecordCount}></lightning-menu-item>
+      </lightning-button-menu>
+    </template>
+
+    <template if:true={working}>
+      <!-- ローディング中 -->
+      <div style="position: relative; height: 80px;">
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+      </div>
+    </template>
+    <template if:false={working}>
+      <template if:true={owners}>
+        <lightning-layout class="slds-m-around_medium">
+          <lightning-layout-item>
+            <!-- c-contact-list-item emits a non-bubbling event so each element must have a listener-->
+            <template for:each={owners} for:item="owner">
+              <c-sb_oto_owner-list-item
+                  key={owner.id}
+                  user={owner}
+                  showdate={showLastModifiedDate}
+                  onselect={handleSelect}>
+              </c-sb_oto_owner-list-item>
+            </template>
+          </lightning-layout-item>
+        </lightning-layout>
+      </template>
+      <template if:true={message}>
+        <!-- <c-sb_svtool07_error-panel errors={message}></c-sb_svtool07_error-panel> -->
+        <div class="slds-p-around_small">
+          <p>{message}</p>
+        </div>
+      </template>
+    </template>
+      <!-- <template if:false={owners.data.length}>
+        <lightning-layout class="slds-m-around_medium">
+          <p><lightning-formatted-text value="同じ名刺はないか、他に同じ人の名刺を持つユーザはいません。"></lightning-formatted-text></p>
+          <p><lightning-formatted-text value={label.SB_NC_Text_NoOtherCardOwners}></lightning-formatted-text></p>
+        </lightning-layout>
+      </template> -->
+    <template if:true={error}>
+      <c-sb_oto_error-panel errors={error}></c-sb_oto_error-panel>
+    </template>
+  </lightning-card>
+</template>

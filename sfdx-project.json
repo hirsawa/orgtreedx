@@ -1,0 +1,36 @@
+{
+  "packageDirectories": [
+    { "path": "sfdx-source/OrgTreeCmp", "default": true },
+    { "path": "sfdx-source/unpackaged"},
+    { "path": "sfdx-source/untracked"}
+  ],
+  "namespace": "OrgTreeCmp",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "45.0",
+  "plugins": {
+    "sfdxFalcon": {
+      "developerAlias"  : "orgtreedx",
+      "developerName"   : "OrgTreeDX Dev",
+      "projectAlias"    : "orgtreedx",
+      "projectName"     : "OrgTreeDX",
+      "projectFamily"   : "APK",
+      "projectType"     : "1GP:managed",
+      "defaultRecipe"   : "build-scratch-org.json",
+      "gitRemoteUri"    : "https://hirsawa@github.com/hirsawa/orgtreedx.git",
+      "gitHubUrl"       : "https://github.com/my-org/my-repo",
+      "projectVersion"  : "0.0.1",
+      "schemaVersion"   : "0.0.1",
+      "pluginVersion"   : "0.0.93",
+      "appxPackage"     : {
+        "namespacePrefix"   : "OrgTreeCmp",
+        "packageName"       : "OrgTreeDX",
+        "metadataPackageId" : "0337F000000l0TYQAY",
+        "packageVersionId"  : {
+          "release" : "04t7F000005Ex0xQAC",
+          "beta"    : "04t7F000005Ex1HQAS"
+        }
+      },
+      "appxDemo": {}
+    }
+  }
+}
