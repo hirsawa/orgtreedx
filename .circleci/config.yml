@@ -60,6 +60,7 @@ jobs:
             sfdx force:user:create --setalias admin-user profileName=システム管理者
             sfdx force:user:password:generate --targetusername admin-user
             sfdx force:user:display --targetusername admin-user
+            sfdx force:package:install --package 04t10000000pMMB --securitytype AllUsers
             sfdx force:source:push -u circle_build_test
       - run:
           name: Run Apex Tests
