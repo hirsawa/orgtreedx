@@ -7,8 +7,15 @@
   "language": "ja_JP",
   "features": [],
   "settings": {
-    "mobileSettings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+  },
+  "languageSettings": {
+      "enableTranslationWorkbench":  true,
+      "enableEndUserLanguages": true
+  },
+  "mobileSettings": {
       "enableS1EncryptedStoragePref2": false
-    }
+  }
   }
 }
