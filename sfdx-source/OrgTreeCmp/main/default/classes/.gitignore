@@ -12,6 +12,11 @@
 
 # Ignore everything...
 #*
+test.cls
+TestControllerController.cls
+Tool_UpdateDeliveryTypeBatch.cls
+Tool_MergeNameCardBatch.cls
+Tool_UpdateDeliveryTypeBatch.cls
 
 # Except the following...
 !.gitignore
