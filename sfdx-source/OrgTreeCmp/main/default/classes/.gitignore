@@ -12,9 +12,10 @@
 
 # Ignore everything...
 #*
+SB_Ot_SObjectConfigTestSVPackage.cls
 test.cls
 TestControllerController.cls
-Tool_UpdateDeliveryTypeBatch.cls
+Tool_DeleteLartgeVolumeBatch.cls
 Tool_MergeNameCardBatch.cls
 Tool_UpdateDeliveryTypeBatch.cls
 
