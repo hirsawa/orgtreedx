@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OwnerDateRange__c</fullName>
+    <defaultValue>-1</defaultValue>
+    <deprecated>false</deprecated>
+    <description>対象の取引先責任者レコードあるいは取引先レコードの最終更新日の範囲</description>
+    <externalId>false</externalId>
+    <label>所有者: 対象レコードの期日の範囲(年)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

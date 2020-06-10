@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customLabels>
+        <label><!-- AAA --></label>
+        <name>AAA</name>
+    </customLabels>
+    <customLabels>
         <label>昇順</label>
         <name>SB_OT_SORT_ASCENDING</name>
     </customLabels>
@@ -17,20 +21,116 @@
         <name>SB_Ot_AppTitle</name>
     </customLabels>
     <customLabels>
+        <label>全て開く</label>
+        <name>SB_Ot_Btn_ExpandAll</name>
+    </customLabels>
+    <customLabels>
         <label>自分が所有者</label>
         <name>SB_Ot_Cap_CardIOwn</name>
+    </customLabels>
+    <customLabels>
+        <label>対象レコードの条件</label>
+        <name>SB_Ot_Conf_Condition</name>
+    </customLabels>
+    <customLabels>
+        <label>対象レコードの条件を選択します。</label>
+        <name>SB_Ot_Conf_Condition_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>対象レコードの期日の範囲(年)</label>
+        <name>SB_Ot_Conf_DateRange</name>
+    </customLabels>
+    <customLabels>
+        <label>最終更新日の範囲、または名刺では名刺交換日の範囲を選択します。</label>
+        <name>SB_Ot_Conf_DateRange_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>氏名とメールアドレスを表示する</label>
+        <name>SB_Ot_Conf_DisplayEmail</name>
+    </customLabels>
+    <customLabels>
+        <label>氏名に役職を追加して表示します。</label>
+        <name>SB_Ot_Conf_DisplayEmail_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>表示形式</label>
+        <name>SB_Ot_Conf_DisplayMode</name>
     </customLabels>
     <customLabels>
         <label>表示形式</label>
         <name>SB_Ot_Conf_DisplayModeLabel</name>
     </customLabels>
     <customLabels>
+        <label>情報の表示形式を選択します。</label>
+        <name>SB_Ot_Conf_DisplayMode_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>設定:氏名と所有者を表示する</label>
+        <name>SB_Ot_Conf_DisplayOwner</name>
+    </customLabels>
+    <customLabels>
+        <label>氏名にレコードの所有者を追加して表示します。</label>
+        <name>SB_Ot_Conf_DisplayOwner_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>氏名と役職を表示する</label>
+        <name>SB_Ot_Conf_DisplayTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>氏名に役職を追加して表示します。</label>
+        <name>SB_Ot_Conf_DisplayTitle_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>部署項目の分割方法</label>
+        <name>SB_Ot_Conf_DivideMethod</name>
+    </customLabels>
+    <customLabels>
+        <label>部門、部署を分割して階層に展開する場合の分割方法を選択します。</label>
+        <name>SB_Ot_Conf_DivideMethod_Help</name>
+    </customLabels>
+    <customLabels>
         <label>部署名の項目</label>
         <name>SB_Ot_Conf_DivisionField</name>
     </customLabels>
     <customLabels>
+        <label>標準の項目以外を部署名とする場合、指定します。</label>
+        <name>SB_Ot_Conf_DivisionField_Help</name>
+    </customLabels>
+    <customLabels>
         <label>メールアドレスの項目</label>
         <name>SB_Ot_Conf_EmailField</name>
+    </customLabels>
+    <customLabels>
+        <label>表示形式の切り替えを可能にする</label>
+        <name>SB_Ot_Conf_EnableSelectDisplayMode</name>
+    </customLabels>
+    <customLabels>
+        <label>ツリー表示形式、グリッド表示形式を選択するメニューボタンを表示します。</label>
+        <name>SB_Ot_Conf_EnableSelectDisplayMode_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>部署項目の分割方法の切り替えを可能にする</label>
+        <name>SB_Ot_Conf_EnableSelectDivideMethod</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 設定ヘルプ:部署項目の分割方法の切り替えを可能にする --></label>
+        <name>SB_Ot_Conf_EnableSelectDivideMethod_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>グリッドに表示する項目</label>
+        <name>SB_Ot_Conf_GridFields</name>
+    </customLabels>
+    <customLabels>
+        <label>グリッドに表示する項目をAPI名で指定します。未入力の場合、所定の項目を表示します。</label>
+        <name>SB_Ot_Conf_GridFields_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Title, Phone, EMail, OwnerId など</label>
+        <name>SB_Ot_Conf_GridFields_PlaceHolder</name>
+    </customLabels>
+    <customLabels>
+        <label>検索するレコード数の上限値</label>
+        <name>SB_Ot_Conf_MaxRecs</name>
     </customLabels>
     <customLabels>
         <label>対象のオブエジェクトで取得するレコード数の上限値</label>
@@ -41,12 +141,60 @@
         <name>SB_Ot_Conf_MaxRecsLabel</name>
     </customLabels>
     <customLabels>
+        <label>対象のオブエジェクトで取得するレコード数の上限値</label>
+        <name>SB_Ot_Conf_MaxRecs_Help</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 設定上限:検索するレコード数の上限値 --></label>
+        <name>SB_Ot_Conf_MaxRecs_Max</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 設定下限:検索するレコード数の上限値 --></label>
+        <name>SB_Ot_Conf_MaxRecs_Min</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 設定省略値:検索するレコード数の上限値 --></label>
+        <name>SB_Ot_Conf_MaxRecs_def</name>
+    </customLabels>
+    <customLabels>
+        <label>グリッドでは氏名のみ</label>
+        <name>SB_Ot_Conf_OnlyNameInGrid</name>
+    </customLabels>
+    <customLabels>
+        <label>グリッドでは氏名に追加の情報を表示しません。</label>
+        <name>SB_Ot_Conf_OnlyNameInGrid_Help</name>
+    </customLabels>
+    <customLabels>
         <label>組織名の項目</label>
         <name>SB_Ot_Conf_OrganizationField</name>
     </customLabels>
     <customLabels>
+        <label>標準の項目以外を組織名とする場合、指定します。取引先責任者では取引先の項目を指定します。</label>
+        <name>SB_Ot_Conf_OrganizationField_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>参照するオブジェクト(項目)</label>
+        <name>SB_Ot_Conf_ReferenceObject</name>
+    </customLabels>
+    <customLabels>
+        <label>参照するオブジェクトのレコードIDを持つ項目を選択します。</label>
+        <name>SB_Ot_Conf_ReferenceObject_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>タイトル</label>
+        <name>SB_Ot_Conf_Title</name>
+    </customLabels>
+    <customLabels>
         <label>役職名の項目</label>
         <name>SB_Ot_Conf_TitleField</name>
+    </customLabels>
+    <customLabels>
+        <label>標準の項目以外を役職名とする場合、指定します。</label>
+        <name>SB_Ot_Conf_TitleField_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>コンポーネントのタイトルを指定します。</label>
+        <name>SB_Ot_Conf_Title_Help</name>
     </customLabels>
     <customLabels>
         <label>取引先責任者のロール</label>
@@ -121,6 +269,10 @@
         <name>SB_Ot_GridFirstLabelFormat</name>
     </customLabels>
     <customLabels>
+        <label><!-- Gridでの選択中のレコードの識別子 --></label>
+        <name>SB_Ot_GridSelectedRecordMark</name>
+    </customLabels>
+    <customLabels>
         <label>最新の名刺への参照があるレコードのみ</label>
         <name>SB_Ot_HaveLatestNameCardReference</name>
     </customLabels>
@@ -181,6 +333,14 @@
         <name>SB_Ot_NoChangeLatestCards</name>
     </customLabels>
     <customLabels>
+        <label>(選択可能な条件はありません)</label>
+        <name>SB_Ot_NoSelectCondition</name>
+    </customLabels>
+    <customLabels>
+        <label>未選択</label>
+        <name>SB_Ot_NotSelected</name>
+    </customLabels>
+    <customLabels>
         <label><!-- 古い名刺へのリンクを示すための書式 --></label>
         <name>SB_Ot_OldNameCardLinkFormat</name>
     </customLabels>
@@ -217,6 +377,18 @@
         <name>SB_Ot_RecordDetailUrlFormat</name>
     </customLabels>
     <customLabels>
+        <label>サンブリッジ・グループ</label>
+        <name>SB_Ot_SunbridgeGroup</name>
+    </customLabels>
+    <customLabels>
+        <label>不正</label>
+        <name>SB_Ot_Text_Invalid</name>
+    </customLabels>
+    <customLabels>
+        <label>{0} {1} 不正</label>
+        <name>SB_Ot_Text_Invalid2</name>
+    </customLabels>
+    <customLabels>
         <label>{0} {1} {2} 不正</label>
         <name>SB_Ot_Text_Invalid3</name>
     </customLabels>
@@ -231,6 +403,10 @@
     <customLabels>
         <label>レコード</label>
         <name>SB_Ot_Text_SObjectColumnTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>タイトル</label>
+        <name>SB_Ot_Text_Title</name>
     </customLabels>
     <customLabels>
         <label>本年度および前年度、前々年度</label>
@@ -263,6 +439,10 @@
     <customLabels>
         <label>ツリー</label>
         <name>SB_Ot_Tree</name>
+    </customLabels>
+    <customLabels>
+        <label>名称</label>
+        <name>SB_Ot_TreeGridCol_Name</name>
     </customLabels>
     <customLabels>
         <label><!-- Treeでの選択中のレコードの識別子 --></label>

@@ -1,0 +1,77 @@
+<!--
+  SB_Ot_AnyObject
+    リード、名刺で使う 組織情報コンポーネント　
+-->
+<aura:component implements="force:hasRecordId,flexipage:availableForRecordHome,flexipage:availableForAllPageTypes" access="global">
+
+  <aura:attribute name="recordId" type="Id"/>
+  <!-- Lightningアウトで動いてる？ -->
+  <aura:attribute name="lightningOut" type="Boolean" default="false" access="public"/> 　
+  <!-- 処理中 -->
+  <!-- <aura:attribute name="working" type="Boolean" default="true"/> -->
+  <!-- エラーメッセージ -->
+  <!-- <aura:attribute name="errorMsg" type="String" /> -->
+  <!-- uiTheme  -->
+  <!-- <aura:attribute name="uiTheme" type="String" default="Theme4d" access="public"/>  -->
+  <!--  AppBuilderの設定値　 -->
+  <!-- タイトル -->
+  <aura:attribute name="appTitle" type="String" access="global" />
+  <!-- v1.1 対象とするレコードのID項目 -->
+  <aura:attribute name="idField" type="String" access="global"/> 　
+  <!-- 表示形式 -->
+  <aura:attribute name="displayFormat" type="String" default="grid" access="global"/> 　
+  <!-- 表示形式切り替え可能 AppBuilderの設定はなく、カスタム設定を取得してきまるので、default = false -->
+  <aura:attribute name="visibleFormatMenu" type="Boolean" default="false" access="global"/>
+  <!-- 対象レコードの期日の範囲 default は、.design 経由で指定 -->
+  <aura:attribute name="dateRange" type="String" access="global"/>
+  <!-- 対象レコードの条件 default は、.design 経由で指定 -->
+  <aura:attribute name="otherCondition" type="String" access="global"/>
+  <!-- 組織名の項目 default は、.design 経由で指定 -->
+  <aura:attribute name="orgField" type="String" access="global"/>
+  <!-- 部署名の項目 default は、.design 経由で指定 -->
+  <aura:attribute name="deptField" type="String" access="global"/>
+  <!-- 役職名の項目 default は、.design 経由で指定 -->
+  <aura:attribute name="titleField" type="String" access="global"/>
+  <!-- グリッドに表示する項目 default は、.design 経由で指定 ないけど-->
+  <aura:attribute name="gridFields" type="String" access="global"/>
+  <!-- 部署項目の分割方法 default は、.design 経由で指定 -->
+  <aura:attribute name="deptParser" type="String" access="global"/>
+  <!-- 部署項目の分割方法の切り替えを可能にする AppBuilderの設定はなく、カスタム設定を取得してきまるので、default = false-->
+  <aura:attribute name="visibleParserMenu" type="Boolean" default="false" access="global"/>
+  <!-- 名称に役職を付与する デフォルトは null -->
+  <aura:attribute name="showTitle" type="Boolean" access="global"/>
+  <!-- 名称に所有者を付与する デフォルトは null -->
+  <aura:attribute name="showOwner" type="Boolean" access="global"/>
+  <!-- 名称にメールアドレスを付与する デフォルトは null -->
+  <aura:attribute name="showEMail" type="Boolean" access="global"/>
+  <!--  グリッドでは名称のみ グリッドのラベルには 役職等を表示しない デフォルトは null -->
+  <aura:attribute name="gridLabelNoExtra" type="Boolean" access="global"/>
+  <!-- 検索する名刺レコード数の上限値 -->
+  <aura:attribute name="maxRecs" type="Integer" default="1000" access="global"/>
+  <!-- 親・子の取引先を階層に含める -->
+  <!-- <aura:attribute name="accountAssociation" type="Boolean" default="true" access="public"/> -->
+  <!-- 取引先 部署項目の使用方法 -->
+  <!-- <aura:attribute name="accountDeptUsage" type="String" default="None" access="public"/> -->
+
+  <c:SB_Ot_OrgTree aura:id="orgTree"
+      recordId="{!v.recordId}"
+      lightningOut="{!v.lightningOut}"
+      appTitle="{!v.appTitle}"
+      idField="{!v.idField}"
+      displayFormat="{!v.displayFormat}"
+      visibleFormatMenu="{!v.visibleFormatMenu}"
+      dateRange="{!v.dateRange}"
+      otherCondition="{!v.otherCondition}"
+      orgField="{!v.orgField}"
+      deptField="{!v.deptField}"
+      titleField="{!v.titleField}"
+      gridFields="{!v.gridFields}"
+      deptParser="{!v.deptParser}"
+      visibleParserMenu="{!v.visibleParserMenu}"
+      showTitle="{!v.showTitle}"
+      showOwner="{!v.showOwner}"
+      showEMail="{!v.showEMail}"
+      gridLabelNoExtra="{!v.gridLabelNoExtra}"
+      maxRecs="{!v.maxRecs}"
+    />
+</aura:component>

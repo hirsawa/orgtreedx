@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DepartmentParser__c</fullName>
+    <defaultValue>0</defaultValue>
+    <deprecated>false</deprecated>
+    <description>部門、部署の分割方法。#AppBuilderでの指定が優先する。
+1: 改行で分割
+2: 部署値を比較して、超過した文字列を階層にする。
+3: 正規表現
+4: 部署項目の値を分割しないでそのまま使う
+その他:  区切文字（部門、部署の階層の区切り文字正規表現）で区切って階層化する。ただし、英数字のみの語は他に連結する。区切ったノード名で長さ比較する</description>
+    <externalId>false</externalId>
+    <label>部署項目の分割方法</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LeadTreeGridColumns__c</fullName>
+    <defaultValue>&apos;Title, Phone, MobilePhone, EMail, SmartViscaf__NameCard__c, OwnerId&apos;</defaultValue>
+    <deprecated>false</deprecated>
+    <externalId>false</externalId>
+    <label>[不使用] リード: グリッドに表示する項目</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

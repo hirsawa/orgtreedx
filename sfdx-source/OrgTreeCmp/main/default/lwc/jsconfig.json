@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/sb_oto_errorPanel": [
+                "sb_oto_errorPanel/sb_oto_errorPanel.js"
+            ],
+            "c/sb_oto_ldsUtils": [
+                "sb_oto_ldsUtils/sb_oto_ldsUtils.js"
+            ],
+            "c/sb_oto_ownerListItem": [
+                "sb_oto_ownerListItem/sb_oto_ownerListItem.js"
+            ],
+            "c/sb_oto_recordOwners": [
+                "sb_oto_recordOwners/sb_oto_recordOwners.js"
+            ],
+            "c/sb_otp_personRecords": [
+                "sb_otp_personRecords/sb_otp_personRecords.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

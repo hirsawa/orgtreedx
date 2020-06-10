@@ -4,7 +4,7 @@
 # - This directory's README file (README.md)
 # - Any permission sets deemed as "core"
 #
-# TODO: Need to validate the need here.  
+# TODO: Need to validate the need here.
 #
 # TODO: Need to update the text below to be specific to page layouts.
 #
@@ -12,7 +12,7 @@
 ################################################################################
 
 # Ignore everything...
-*
+#*
 
 # Except the following files...
 !.gitignore

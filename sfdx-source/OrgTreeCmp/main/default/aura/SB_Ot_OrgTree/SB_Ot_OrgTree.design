@@ -1,0 +1,39 @@
+<!--
+  SB_Ot_OrgTree.design
+  デザイン 設定 Attribute
+  .cmp が implements="force:hasRecordId,flexipage:availableForRecordHome" じゅないので、使われないけど
+  .desgin のなかでは、カスタム表示ラベルとか 名前空間名をつける。
+    それでも、design:component  では カスタム表示ラベルをつかえない。
+
+    v1.1 2020.01.xx
+    こっちは、SV_DEV-1613 組織情報コンポーネント AppBuilderの中で名称にカスタム表示ラベルが使えるか確認 が完全には解決していなので、直書きのまま
+
+ -->
+<design:component label="組織情報DX">
+  <design:attribute name="appTitle" label="タイトル" description="コンポーネントのタイトルを指定します。"/>
+  <design:attribute name="idField" label="参照するオブジェクト(項目)" datasource="apex://SB_Ot_LcRecordIdFieldPickList" description="参照するオブジェクトのレコードIDを持つ項目を選択します。"/>
+  <design:attribute name="displayFormat" label="表示形式" datasource="apex://SB_Ot_LcDisplayModePickList" description="情報の表示形式を選択します。"/>
+  <design:attribute name="visibleFormatMenu" label="表示形式の切り替えを可能にする"  description="ツリー表示形式、グリッド表示形式を選択するメニューボタンを表示します。" />
+  <design:attribute name="dateRange" label="対象レコードの期日の範囲(年)" datasource="apex://SB_Ot_LcDateRangePickList" description="最終更新日の範囲、または名刺では名刺交換日の範囲"/>
+  <design:attribute name="otherCondition" label="対象レコードの条件" datasource="apex://SB_Ot_LcOtherConditionPickList" description="対象レコードの条件を選択します。"/>
+  <design:attribute name="orgField" label="組織名の項目" default="" placeholder=""  description="標準の項目以外を組織名とする場合、指定します。取引先責任者では取引先の項目を指定します。"/>
+  <design:attribute name="deptField" label="部署名の項目" default="" placeholder=""  description="標準の項目以外を部署名とする場合、指定します。"/>
+  <design:attribute name="titleField" label="役職名の項目" default="" placeholder=""  description="標準の項目以外を役職名とする場合、指定します。"/>
+  <design:attribute name="gridFields" label="グリッドに表示する項目" default="" placeholder="Title, Phone, EMail, OwnerId, ..." description="グリッドに表示する項目をAPI名で指定します。未入力の場合、所定の項目を表示します。" />
+  <design:attribute name="deptParser" label="部署項目の分割方法" datasource="apex://SB_Ot_LcDeptParserPickList" description="部門、部署を分割して階層に展開する場合の分割方法を選択します。"/>
+  <design:attribute name="visibleParserMenu" label="部署項目の分割方法の切り替えを可能にする"  description="部署項目の分割方法を選択するメニューボタンを表示します。" />
+  <design:attribute name="showTitle" label="氏名と役職を表示する" description="氏名に役職を追加して表示します。" />
+  <design:attribute name="showOwner" label="氏名と所有者を表示する" description="氏名にレコードの所有者を追加して表示します。" />
+  <design:attribute name="showEMail" label="氏名とメールアドレスを表示する" description="氏名にメールアドレスを追加して表示します。" />
+  <design:attribute name="gridLabelNoExtra" label="グリッドでは氏名のみ" description="グリッドでは氏名に追加の情報を表示しません。" />
+  <design:attribute name="maxRecs" label="検索するレコード数の上限値" description="対象のオブエジェクトで取得するレコード数の上限値" min="10" max="5000"/>
+  <design:attribute name="clickToRecord" label="ツリー:名称のクリックでレコードに遷移" description="名称をクリックしたら該当のレコード詳細画面に遷移します。ツリー表示形式での指定です。" />
+  <design:attribute name="accountAssociation" label="親・子の取引先を階層に含める" description="親取引先をもとに関連を階層化します。" />
+  <design:attribute name="accountGridFields" label="取引先 グリッドに表示する項目" placeholder="Site, OwnerId など" description="グリッドに表示する取引先の項目をAPI名で指定します。未入力の場合、所定の項目を表示します。(none)の場合、名称以外を表示しません。" />
+  <design:attribute name="accountDeptUsage" label="取引先 部署項目の使用方法" datasource="apex://SB_Ot_LcAccountDeptUsagePickList" description="取引先、取引先責任者で利用する場合に、取引先 部門 の使用方法を選択します。"/>
+  <!-- <design:attribute name="multiObjectActive" label="他オブジェクトによる構成を可能にする" description="閲覧中のオブジェクト以外からもレコードを取得します。"/> -->
+  <!-- <design:attribute name="requestObject" label="対象のオブジェクト" datasource="apex://SB_Ot_LcRequestObjectPickList" description="階層の要素となるオブジェクトを選択します。"/> -->
+  <!-- <design:attribute name="changableObject" label="対象のオブジェクトの切り替えを可能にする"  description="対象のオブジェクトの切り替えを可能にします。" /> -->
+  <!-- <design:attribute name="multiObject" label="対象の複数オブジェクト" default="" placeholder="Account, Contact, Lead など" description="対象とする複数のオブジェクトを指定します。"/> -->
+  <!-- <design:attribute name="multiObjectGridFields" label="複数オブジェクトでグリッドに表示する項目" placeholder="Title, Phone, EMail, OwnerId など" description="複数のオブジェクトのグリッドに表示する項目を指定します。"/> -->
+</design:component>

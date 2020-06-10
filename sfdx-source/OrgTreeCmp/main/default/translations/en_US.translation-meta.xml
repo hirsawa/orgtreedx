@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customLabels>
+        <label><!-- AAA --></label>
+        <name>AAA</name>
+    </customLabels>
+    <customLabels>
         <label>Ascending</label>
         <name>SB_OT_SORT_ASCENDING</name>
     </customLabels>
@@ -17,20 +21,116 @@
         <name>SB_Ot_AppTitle</name>
     </customLabels>
     <customLabels>
+        <label>Expand All</label>
+        <name>SB_Ot_Btn_ExpandAll</name>
+    </customLabels>
+    <customLabels>
         <label>Card I Own</label>
         <name>SB_Ot_Cap_CardIOwn</name>
+    </customLabels>
+    <customLabels>
+        <label>Condition of Effective Records</label>
+        <name>SB_Ot_Conf_Condition</name>
+    </customLabels>
+    <customLabels>
+        <label>Select condition of effective records.</label>
+        <name>SB_Ot_Conf_Condition_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Effective Date Range</label>
+        <name>SB_Ot_Conf_DateRange</name>
+    </customLabels>
+    <customLabels>
+        <label>Select range of effective card exchange date or last modified date.</label>
+        <name>SB_Ot_Conf_DateRange_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Display Email and Title</label>
+        <name>SB_Ot_Conf_DisplayEmail</name>
+    </customLabels>
+    <customLabels>
+        <label>Display Email in addition to Name.</label>
+        <name>SB_Ot_Conf_DisplayEmail_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Format</label>
+        <name>SB_Ot_Conf_DisplayMode</name>
     </customLabels>
     <customLabels>
         <label>Format</label>
         <name>SB_Ot_Conf_DisplayModeLabel</name>
     </customLabels>
     <customLabels>
+        <label>Select format.</label>
+        <name>SB_Ot_Conf_DisplayMode_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Display Name and Owner</label>
+        <name>SB_Ot_Conf_DisplayOwner</name>
+    </customLabels>
+    <customLabels>
+        <label>Display Owner in addition to Name.</label>
+        <name>SB_Ot_Conf_DisplayOwner_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Display Name and Title</label>
+        <name>SB_Ot_Conf_DisplayTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Display Title in addition to Name.</label>
+        <name>SB_Ot_Conf_DisplayTitle_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Dividing Method of Department Value</label>
+        <name>SB_Ot_Conf_DivideMethod</name>
+    </customLabels>
+    <customLabels>
+        <label>Select a method to separate hierarchy elements of department.</label>
+        <name>SB_Ot_Conf_DivideMethod_Help</name>
+    </customLabels>
+    <customLabels>
         <label>Field for Department Name</label>
         <name>SB_Ot_Conf_DivisionField</name>
     </customLabels>
     <customLabels>
+        <label>Select a field to use for department name instead of standard field</label>
+        <name>SB_Ot_Conf_DivisionField_Help</name>
+    </customLabels>
+    <customLabels>
         <label>Field for Email</label>
         <name>SB_Ot_Conf_EmailField</name>
+    </customLabels>
+    <customLabels>
+        <label>Enable Selecting Format</label>
+        <name>SB_Ot_Conf_EnableSelectDisplayMode</name>
+    </customLabels>
+    <customLabels>
+        <label>Display menu button to select format from Tree or Grid</label>
+        <name>SB_Ot_Conf_EnableSelectDisplayMode_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Enable Selecting Dividing Method</label>
+        <name>SB_Ot_Conf_EnableSelectDivideMethod</name>
+    </customLabels>
+    <customLabels>
+        <label>Display menu button to select dividing method of department value.</label>
+        <name>SB_Ot_Conf_EnableSelectDivideMethod_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Fields To Show In Grid</label>
+        <name>SB_Ot_Conf_GridFields</name>
+    </customLabels>
+    <customLabels>
+        <label>Specify API Names of Contact fields to show in grid. Default fields will be shown when empty.</label>
+        <name>SB_Ot_Conf_GridFields_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Title, Phone, EMail, OwnerId, and so on</label>
+        <name>SB_Ot_Conf_GridFields_PlaceHolder</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 設定:検索するレコード数の上限値 --></label>
+        <name>SB_Ot_Conf_MaxRecs</name>
     </customLabels>
     <customLabels>
         <label>Maximum Number of Reccords in Target Object</label>
@@ -41,12 +141,60 @@
         <name>SB_Ot_Conf_MaxRecsLabel</name>
     </customLabels>
     <customLabels>
+        <label>the maximum number of records to query</label>
+        <name>SB_Ot_Conf_MaxRecs_Help</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 設定上限:検索するレコード数の上限値 --></label>
+        <name>SB_Ot_Conf_MaxRecs_Max</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 設定下限:検索するレコード数の上限値 --></label>
+        <name>SB_Ot_Conf_MaxRecs_Min</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- 設定省略値:検索するレコード数の上限値 --></label>
+        <name>SB_Ot_Conf_MaxRecs_def</name>
+    </customLabels>
+    <customLabels>
+        <label>Show only Name in grid</label>
+        <name>SB_Ot_Conf_OnlyNameInGrid</name>
+    </customLabels>
+    <customLabels>
+        <label>No additional information will be displayed to Name in grid.</label>
+        <name>SB_Ot_Conf_OnlyNameInGrid_Help</name>
+    </customLabels>
+    <customLabels>
         <label>Field for Organization Name</label>
         <name>SB_Ot_Conf_OrganizationField</name>
     </customLabels>
     <customLabels>
+        <label>Select a field to use for organization name instead of standard field. Select an Account field for Contact.</label>
+        <name>SB_Ot_Conf_OrganizationField_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Reffered Object (field)</label>
+        <name>SB_Ot_Conf_ReferenceObject</name>
+    </customLabels>
+    <customLabels>
+        <label>Select field having reffered object Id.</label>
+        <name>SB_Ot_Conf_ReferenceObject_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Title</label>
+        <name>SB_Ot_Conf_Title</name>
+    </customLabels>
+    <customLabels>
         <label>Field for Title</label>
         <name>SB_Ot_Conf_TitleField</name>
+    </customLabels>
+    <customLabels>
+        <label>Select a field to use for title instead of standard field.</label>
+        <name>SB_Ot_Conf_TitleField_Help</name>
+    </customLabels>
+    <customLabels>
+        <label>Specify component title.</label>
+        <name>SB_Ot_Conf_Title_Help</name>
     </customLabels>
     <customLabels>
         <label>Contact Role</label>
@@ -121,6 +269,10 @@
         <name>SB_Ot_GridFirstLabelFormat</name>
     </customLabels>
     <customLabels>
+        <label><!-- Gridでの選択中のレコードの識別子 --></label>
+        <name>SB_Ot_GridSelectedRecordMark</name>
+    </customLabels>
+    <customLabels>
         <label>Reference to the Latest Business Card</label>
         <name>SB_Ot_HaveLatestNameCardReference</name>
     </customLabels>
@@ -181,6 +333,14 @@
         <name>SB_Ot_NoChangeLatestCards</name>
     </customLabels>
     <customLabels>
+        <label>(no selectable condition)</label>
+        <name>SB_Ot_NoSelectCondition</name>
+    </customLabels>
+    <customLabels>
+        <label>Unselected</label>
+        <name>SB_Ot_NotSelected</name>
+    </customLabels>
+    <customLabels>
         <label><!-- 古い名刺へのリンクを示すための書式 --></label>
         <name>SB_Ot_OldNameCardLinkFormat</name>
     </customLabels>
@@ -217,6 +377,18 @@
         <name>SB_Ot_RecordDetailUrlFormat</name>
     </customLabels>
     <customLabels>
+        <label>Sunbridge Group</label>
+        <name>SB_Ot_SunbridgeGroup</name>
+    </customLabels>
+    <customLabels>
+        <label>invalid</label>
+        <name>SB_Ot_Text_Invalid</name>
+    </customLabels>
+    <customLabels>
+        <label>{0} {1} invalid</label>
+        <name>SB_Ot_Text_Invalid2</name>
+    </customLabels>
+    <customLabels>
         <label>{0} {1} {2} invalid</label>
         <name>SB_Ot_Text_Invalid3</name>
     </customLabels>
@@ -231,6 +403,10 @@
     <customLabels>
         <label>Record</label>
         <name>SB_Ot_Text_SObjectColumnTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Title</label>
+        <name>SB_Ot_Text_Title</name>
     </customLabels>
     <customLabels>
         <label>Current and Previous 2 FY</label>
@@ -263,6 +439,10 @@
     <customLabels>
         <label>Tree</label>
         <name>SB_Ot_Tree</name>
+    </customLabels>
+    <customLabels>
+        <label>Name</label>
+        <name>SB_Ot_TreeGridCol_Name</name>
     </customLabels>
     <customLabels>
         <label><!-- Treeでの選択中のレコードの識別子 --></label>

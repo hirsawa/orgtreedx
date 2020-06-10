@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DepartmentFieldsWithTitle__c</fullName>
+    <defaultValue>&apos;SmartViscaf__division_name__c&apos;</defaultValue>
+    <deprecated>false</deprecated>
+    <description>カンマ区切りで項目API名を指定します。
+これらの項目が部署項目として指定された場合、役職項目の値を削除します。
+・テキストエリアで複数行の場合、行を削除します。
+・1行の場合、役職のみを削除します。</description>
+    <externalId>false</externalId>
+    <label>部署項目に役職を含む項目</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

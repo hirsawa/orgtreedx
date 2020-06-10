@@ -1,0 +1,55 @@
+/* .THIS {
+    height: 20rem;*/
+    /*width: ;
+} */
+
+.THIS .buttons {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.THIS .smallFont {
+  font-size: 0.5rem;
+  /* line-height: 1.0rem; */
+  padding-top: 0.175rem!important;
+  padding-bottom: 0.175rem!important;
+}
+
+.THIS .narrow {
+  padding-top: 0.175rem;
+  padding-bottom: 0.175rem;
+}
+
+.THIS .defaultFont {
+  font-size: 1rem;
+  /* line-height: 1.5rem; */
+}
+
+.THIS .slds-button_neutral {
+  border-color: rgb(221, 219, 218);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.THIS .slds-button__icon_left {
+  margin-right: 0rem;
+}
+
+.THIS .slds-tree_container {
+  /* min-width: 7.5rem; */
+  /* max-width: 25rem; */
+  /* Tree の横幅が制限されてるので解除します */
+  max-width: none;
+}
+
+/* グリッドのとき レコードじゃない ラベルだけの aタグを無効化する */
+.THIS a[title="#"] {
+  pointer-events: none;
+  color: initial;
+}
+
+/* ツリー要素のうち 個人要素(href="#" でないaタグ) の中の span は太字 */
+.THIS lightning-tree-item a:not([href="#"]) span {
+  font-weight: bold;
+}

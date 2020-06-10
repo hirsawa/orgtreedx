@@ -1,0 +1,196 @@
+<!--
+/**
+ *
+ *    SB_Ot_OrgTree.cmp
+ *    Lightning Component による 組織ツリー for Account, Contact, Lead
+ *
+ * Copyright (C) 2017-2018 SunBridge Inc. All Rights Reserved.
+ *
+ *  @author sawano
+ *  @Version 1      2017.11.xx
+ *  @Version 2      v1.1 2019.05.xx SB_Ot_OrgTree.cmp SmartVisca 組織情報の派生
+ *
+ **/
+ -->
+<aura:component controller="SB_Ot_OrgTreeLcController" implements="force:hasRecordId" access="global">
+
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+  <!-- 選択されてるレコードID -->
+  <aura:attribute name="recordId" type="Id"/>
+  <!-- Lightningアウトで動いてる？ -->
+  <aura:attribute name="lightningOut" type="Boolean" default="false" access="public"/> 　
+  <!-- 処理中 -->
+  <aura:attribute name="working" type="Boolean" default="true"/>
+  <!-- <aura:attribute name="cssloaded" type="Boolean" default="false"/> -->
+  <!-- エラーメッセージ -->
+  <aura:attribute name="errorMsg" type="String" />
+  <!-- uiTheme  -->
+  <aura:attribute name="uiTheme" type="String" default="Theme4d" access="public"/>
+  <!--  AppBuilderの設定値　 -->
+  <!-- タイトル -->
+  <aura:attribute name="appTitle" type="String" access="public" />
+  <!-- v1.1 対象とするレコードのID項目 -->
+  <aura:attribute name="idField" type="String" access="public"/> 　
+  <!-- 表示形式 -->
+  <aura:attribute name="displayFormat" type="String" default="grid" access="public"/> 　
+  <!-- 表示形式切り替え可能 AppBuilderの設定はなく、カスタム設定を取得してきまるので、default = false -->
+  <aura:attribute name="visibleFormatMenu" type="Boolean" default="false" access="public"/>
+  <!-- 対象レコードの期日の範囲 default は、.design 経由で指定 -->
+  <aura:attribute name="dateRange" type="String" access="public"/>
+  <!-- 対象レコードの条件 default は、.design 経由で指定 -->
+  <aura:attribute name="otherCondition" type="String" access="public"/>
+  <!-- 組織名の項目 default は、.design 経由で指定 -->
+  <aura:attribute name="orgField" type="String" access="public"/>
+  <!-- 部署名の項目 default は、.design 経由で指定 -->
+  <aura:attribute name="deptField" type="String" access="public"/>
+  <!-- 役職名の項目 default は、.design 経由で指定 -->
+  <aura:attribute name="titleField" type="String" access="public"/>
+  <!-- グリッドに表示する項目 default は、.design 経由で指定 ないけど-->
+  <aura:attribute name="gridFields" type="String" access="public"/>
+  <!-- 部署項目の分割方法 default は、.design 経由で指定 -->
+  <aura:attribute name="deptParser" type="String" access="public"/>
+  <!-- 部署項目の分割方法の切り替えを可能にする AppBuilderの設定はなく、カスタム設定を取得してきまるので、default = false -->
+  <aura:attribute name="visibleParserMenu" type="Boolean" default="false" access="public"/>
+  <!-- 名称に役職を付与する -->
+  <aura:attribute name="showTitle" type="Boolean" access="public"/>
+  <!-- 名称に所有者を付与する -->
+  <aura:attribute name="showOwner" type="Boolean" access="public"/>
+  <!-- 名称にメールアドレスを付与する -->
+  <aura:attribute name="showEMail" type="Boolean" access="public"/>
+  <!--  グリッドでは名称のみ グリッドのラベルには 役職等を表示しない -->
+  <aura:attribute name="gridLabelNoExtra" type="Boolean" access="public"/>
+  <!-- 検索する名刺レコード数の上限値 -->
+  <aura:attribute name="maxRecs" type="Integer" default="1000" access="public"/>
+  <!-- 名称のクリックでレコードに遷移 ツリーのとき機能、SmartViscaでの組織情報LCにはあったので、変数だけ内部的に残しとく -->
+  <aura:attribute name="clickToRecord" type="Boolean" default="true" access="public"/>
+  <!-- 親・子の取引先を階層に含める -->
+  <aura:attribute name="accountAssociation" type="Boolean" default="true" access="public"/>
+  <!-- 取引先 グリッドに表示する項目 -->
+  <aura:attribute name="accountGridFields" type="String" access="public"/>
+  <!-- 取引先 部署項目の使用方法 default は、.design 経由で指定 -->
+  <aura:attribute name="accountDeptUsage" type="String" access="public"/>
+  <!-- v1.2 グリッドで行番号を表示する AppBuilderの設定はなく、カスタム設定を取得してきまるので、default = false -->
+  <aura:attribute name="gridShowNum" type="Boolean" default="false" access="public"/>
+
+  <!-- 操作継続可能 -->
+  <aura:attribute name="enableOperation" type="Boolean" default="false" access="public"/>
+
+  <!-- 画面の状態保持用 -->
+
+  <!-- 関連するオブジェクトでツリーを作るためのメニュー用 -->
+  <aura:attribute name="relateObjects" type="Object[]" access="private"/>
+  <!-- 表示してるオブジェクト -->
+  <aura:attribute name="sourceObject" type="String" access="private"/>
+  <!-- 階層構築に使ったレコードのID -->
+  <aura:attribute name="targetId" type="String" access="private"/>
+
+  <!-- ブランチは開いてる？ -->
+  <aura:attribute name="expanded" type="Boolean" default="true" access="public"/> 　
+  <!-- 小さいフォント -->
+  <aura:attribute name="smallFont" type="Boolean" default="false" access="public"/> 　
+  <!--
+  <aura:method name="setTreeGrid" action="{!c.doSetTreeGrid}" description="">
+    <aura:attribute name="input1" type="String" default="組織"/>
+  </aura:method>
+ -->
+  <!-- SB_Ot_OrgTreeController の関数 Tree を全開｜全閉 -->
+  <aura:method name="changeTreeExpansion" action="{!c.doChangeTreeExpansion}" description="">
+    <aura:attribute name="item" type="Object" />
+    <aura:attribute name="expanded" type="Boolean"/>
+  </aura:method>
+
+
+  <aura:attribute name="gridColumns" type="List" access="public" />
+  <aura:attribute name="gridData" type="Object" access="public" />
+  <aura:attribute name="gridExpandedRows" type="List" access="public" />
+
+  <aura:attribute name="items" type="Object"  access="public" />
+  <aura:attribute name="rootLabel" type="String" access="public" />
+  <aura:attribute name="summary" type="String" access="public" />
+
+<ui:scrollerWrapper >
+  <lightning:card iconName="utility:company" title="{!v.appTitle}">
+
+    <aura:set attribute="actions">
+
+      <!-- モード変更可能 -->
+      <aura:if isTrue="{!v.visibleFormatMenu}">
+        <lightning:buttonMenu aura:id="menuMode" iconName="utility:table" title="{!$Label.c.SB_Ot_Conf_DisplayModeLabel}" alternativeText="{!$Label.c.SB_Ot_Conf_DisplayModeLabel}"
+          onselect="{!c.selectMode}" disabled="{!v.working || !v.enableOperation}" menuAlignment="right">
+          <lightning:menuItem label="{!$Label.c.SB_Ot_Grid}" value="grid" checked="{!v.displayFormat=='grid'}" />
+          <lightning:menuItem label="{!$Label.c.SB_Ot_Tree}" value="tree" checked="{!v.displayFormat=='tree'}"/>
+        </lightning:buttonMenu>
+      </aura:if>
+      <!-- 部署項目の分割方法の切り替えを可能にする -->
+      <aura:if isTrue="{!v.visibleParserMenu}">
+        <lightning:buttonMenu aura:id="menuParser" iconName="utility:strategy" title="{!$Label.c.SB_Ot_Conf_DeptParseMethodLabel}" alternativeText="{!$Label.c.SB_Ot_Conf_DeptParseMethodLabel}"
+          onselect="{!c.selectParser}" disabled="{!v.working || !v.enableOperation}" menuAlignment="right">
+          <lightning:menuItem label="{!$Label.c.SB_Ot_DeptParser_Space}" value="separator" checked="{!v.deptParser=='separator'}"/>
+          <lightning:menuItem label="{!$Label.c.SB_Ot_DeptParser_NewLine}" value="line" checked="{!v.deptParser=='line'}" />
+          <lightning:menuItem label="{!$Label.c.SB_Ot_DeptParser_Comparision}" value="comparision" checked="{!v.deptParser=='comparision'}" />
+          <lightning:menuItem label="{!$Label.c.SB_Ot_DeptParser_Regex}" value="regex" checked="{!v.deptParser=='regex'}" />
+          <lightning:menuItem label="{!$Label.c.SB_Ot_DeptParser_NotParse}" value="noop" checked="{!v.deptParser=='noop'}" />
+        </lightning:buttonMenu>
+      </aura:if>
+      <!-- 全開｜全閉 Treeのときに全開がきかないので、コメントにしとく-->
+      <!-- <lightning:buttonStateful iconNameWhenOff="utility:expand_alt" iconNameWhenOn="utility:contract_alt"
+        state="{!v.expanded}" onclick="{!c.toggleExpansion}"/> -->
+      <!-- フォントサイズ 上下padding がうまいこと要素だけに適用できないので、コメントにしとく-->
+      <!-- <lightning:buttonIconStateful iconName="utility:text" selected="{!v.smallFont}"
+        onclick="{!c.onChangeFont}" alternativeText="フォントサイズの変更" disabled="{!v.working}"/> -->
+    </aura:set>
+
+    <aura:if isTrue="{!v.working}">
+    <!-- ローディング中 -->
+      <div style="position: relative; height: 80px;">
+        <lightning:spinner alternativeText="Loading" size="small" />
+      </div>
+
+    <aura:set attribute="else">
+    <!-- ローディング終了 -->
+      <div aura:id="displyaArea">
+        <!-- データ 表示エリア -->
+        <aura:if isTrue="{!v.summary}">
+          <lightning:badge label="{!v.summary}"/>
+        </aura:if>
+        <aura:if isTrue="{!v.displayFormat=='tree'}">
+          <!-- ツリー -->
+          <lightning:tree items="{!v.items}" header="{!v.rootLabel}" onselect="{!c.onSelect}"/>
+          <p style="font-size: 10px; margin-left: 10px;">{!$Label.c.SB_Ot_TreeYourRecordMark}&nbsp;:&nbsp;{!$Label.c.SB_Ot_Cap_CardIOwn}</p>
+        <aura:set attribute="else">
+          <!--  ツリー グリッド-->
+          <lightning:treeGrid aura:id="treeGrid" columns="{!v.gridColumns}" data="{!v.gridData}"
+              expandedRows="{!v.gridExpandedRows}" keyField="name" hideCheckboxColumn="true"
+              showRowNumberColumn = "{!v.gridShowNum}"
+              onToggle="{!c.onGridToddle}"/>
+        </aura:set>
+        </aura:if>
+      </div>
+
+      <aura:if isTrue="{!empty(v.errorMsg)}">
+        <!-- エラーなし -->
+        <!-- ボタン -->
+        <!-- <div class="slds-align_absolute-center">
+          <aura:if isTrue="{!v.lightningOut}">
+            <lightning:button label="Cancel" title="Cancel" iconName="utility:close" iconPosition="left"  onclick="{!c.onClose}"/>
+          </aura:if>
+          <lightning:button label="{!$Label.c.SB_Ot_Btn_ExpandAll}" title="{!$Label.c.SB_Ot_Btn_ExpandAll}" iconName="utility:expand_alt" iconPosition="left" onclick="{!c.onExpandAll}"/>
+          <lightning:button label="全て閉じる" title="全て閉じる" iconName="utility:contract_alt" iconPosition="left"  onclick="{!c.onCollapseAll}"/>
+          <aura:if isTrue="{!v.visibleFormatMenu}">
+            <lightning:button label="モード変更" title="モード変更" iconName="utility:change_record_type" iconPosition="left"  onclick="{!c.onChangeMode}"/>
+          </aura:if>
+          <lightning:button label="フォントサイズ変更" title="フォントサイズ変更" iconName="utility:change_record_type" iconPosition="left"  onclick="{!c.onChangeFont}"/>
+        </div> -->
+      <aura:set attribute="else">
+        <!-- エラー -->
+        <p style="font-size: 10px; margin-left: 10px; color: #cd5c5c;">{!v.errorMsg}</p>
+      </aura:set>
+      </aura:if>
+    </aura:set>
+    </aura:if>
+  </lightning:card>
+</ui:scrollerWrapper>
+<!--     <ui:outputText value="{!$Label.c.SB_NCS1_Text_OnlyLatestNC}"/>
+    <ui:outputText value="{!$Label.c.SB_NCS1_Text_OwnedNamecard}"/>
+ -->
+</aura:component>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DepartmentParserSeparater__c</fullName>
+    <deprecated>false</deprecated>
+    <description>部署項目の分割方法# 1: 区切文字 のとき
+DepartmentParser__c: 1
+正規表現で指定
+省略値は、カスタム表示ラベル SB_Ot_DeptParserSeparaterRegex</description>
+    <externalId>false</externalId>
+    <label>部署項目の区切り文字</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

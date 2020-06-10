@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="sb_otp_personRecords">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <!-- https://success.salesforce.com/issues_view?id=a1p3A000000IXaBQAW
+Custom labels referenced from Design resource of LC doesn't work on Lightning App Builder --><masterLabel>同じ人のレコード</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="appTitle" label="タイトル" type="String" description="コンポーネントのタイトルを指定します。"/>
+            <property name="otherObjects" label="対象のオブジェクト" type="String" placeholder="Lead, Contact, SmaertViscaf__NameCard__c" default="Lead, Contact, SmaertViscaf__NameCard__c" description="同じ人のレコードを調べるオブジェクト、表示順"/>
+            <property name="collateFields" label="照合する項目" type="String" placeholder="Name, EMail, Company, Department, Title, ..." default="Name, EMail" description="同じ人と判断する項目"/>
+            <property name="sortField" label="並び替え項目(初期値)" type="String" datasource="apex://SB_Otp_LcSortFieldPickList"/>
+            <property name="sortOrder" label="並び替え順(初期値)" type="String" datasource="apex://SB_Oto_LcRecOwnersSortOrderPickList"/>
+            <property name="tableFields" label="表示項目" type="String" placeholder="Name, Title, EMail, Phone, MobilePhone, LastModifiedDate, Owner.Name" default="Name, Title, EMail, Phone, MobilePhone, LastModifiedDate, Owner.Name" description="一覧に表示する項目のAPI名をカンマ区切りで入力します"/>
+            <property name="pageSize" label="ページサイズ（未サポート）" type="Integer" default="50" description="一度に読み込むレコード数"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

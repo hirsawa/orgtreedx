@@ -5,8 +5,23 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <label>SB_Ot_CmpLauncher</label>
     <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>3</minorNumber>
+        <namespace>RecordHunter</namespace>
+    </packageVersions>
+    <packageVersions>
         <majorNumber>2</majorNumber>
         <minorNumber>0</minorNumber>
         <namespace>SmartViscaf</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>17</minorNumber>
+        <namespace>sf_chttr_apps</namespace>
+    </packageVersions>
+    <packageVersions>
+        <majorNumber>1</majorNumber>
+        <minorNumber>7</minorNumber>
+        <namespace>sf_com_apps</namespace>
     </packageVersions>
 </ApexPage>
