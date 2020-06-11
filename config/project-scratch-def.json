@@ -7,14 +7,6 @@
   "language": "ja_JP",
   "features": [],
   "settings": {
-    "securitySettings": {
-      "passwordPolicies": {
-        "expiration": "Never"
-      },
-      "sessionSettings": {
-        "sessionTimeout": "TwelveHours"
-      }
-    },
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },

@@ -37,3 +37,13 @@ This directory and the files it contains are located here within the SFDX-Falcon
 [2]: https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_types_list.htm
 [3]: https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_objects_intro.htm
 [4]: https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_unsupported_types.htm
+
+
+    "securitySettings": {
+      "passwordPolicies": {
+        "expiration": "Never"
+      },
+      "sessionSettings": {
+        "sessionTimeout": "TwelveHours"
+      }
+    },
