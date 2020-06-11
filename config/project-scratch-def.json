@@ -7,15 +7,23 @@
   "language": "ja_JP",
   "features": [],
   "settings": {
+    "securitySettings": {
+      "passwordPolicies": {
+        "expiration": "Never"
+      },
+      "sessionSettings": {
+        "sessionTimeout": "TwelveHours"
+      }
+    },
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
-  },
-  "languageSettings": {
-      "enableTranslationWorkbench":  true,
-      "enableEndUserLanguages": true
-  },
-  "mobileSettings": {
-      "enableS1EncryptedStoragePref2": false
-  }
+    },
+    "languageSettings": {
+        "enableTranslationWorkbench":  true,
+        "enableEndUserLanguages": true
+    },
+    "mobileSettings": {
+        "enableS1EncryptedStoragePref2": false
+    }
   }
 }

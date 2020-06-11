@@ -56,7 +56,7 @@ jobs:
             sfdx force:org:list
             sfdx force:limits:api:display -u DevHub
             # sfdx force:org:create -s -f ~/ci_app/config/project-scratch-def.json -a circle_build_$CIRCLE_BUILD_NUM --wait 3
-            sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json -a circle_build_test -s -d 30 --wait 5
+            sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json -a circle_build_test -s -d 1 --wait 5
             sfdx force:user:create --setalias admin-user profileName=システム管理者
             sfdx force:user:password:generate --targetusername admin-user
             sfdx force:user:display --targetusername admin-user
@@ -67,10 +67,10 @@ jobs:
           command: |
             echo 'Running Apex Tests'
             sfdx force:user:permset:assign --permsetname SmartViscaCITestUser
-            mkdir -p ~/junit
-            sfdx force:apex:test:run -c -d ~/junit -r junit --wait 30
+            mkdir -p ~/test-results/junit
+            sfdx force:apex:test:run -c -d ~/test-results/junit -r junit --wait 5
       - store_test_results:
-          path: ~/junit
+          path: ~/test-results
       - run:
           name: Delete Useless Scratch Org
           command: |
