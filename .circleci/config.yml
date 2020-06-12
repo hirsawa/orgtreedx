@@ -16,7 +16,7 @@ jobs:
       # from https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli_standalone.htm
       # and https://developer.salesforce.com/media/salesforce-cli/manifest.json
       - DX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
-      - SV_PACKAGE_VERSION_ID: 04t10000000r5i4
+      - SV_PACKAGE_VERSION_ID: 04t10000000r5i4AAA   # SV 2.0.4
       - SV_INSTALL_KEY: sb201902
     steps:
       - checkout
@@ -62,7 +62,7 @@ jobs:
             sfdx force:user:create --setalias admin-user profileName=システム管理者
             sfdx force:user:password:generate --targetusername admin-user
             sfdx force:user:display --targetusername admin-user
-            sfdx force:package:install --package $SV_PACKAGE_VERSION_ID --installationkey $SV_INSTALL_KEY --securitytype AllUsers
+            sfdx force:package:install --package $SV_PACKAGE_VERSION_ID --installationkey $SV_INSTALL_KEY --securitytype AllUsers --wait 6
             sfdx force:source:push -u circle_build_test
       - run:
           name: Run Apex Tests
