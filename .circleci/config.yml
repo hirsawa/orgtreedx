@@ -9,7 +9,9 @@ general:
 
 jobs:
   build:
-    machine: true
+    docker:
+      - image: ncino/ci-sfdx
+    # machine: true
     no_output_timeout: 30m
     working_directory: ~/ci_app
     environment:
@@ -143,22 +145,22 @@ jobs:
 ## WORKFLOW:  build_and_test
 ## PURPOSE:   Primary workflow used by the CI process.
 ####################################################################################################
-# workflows:
-#   version: 2
-#   build_and_test:
-#     jobs:
-#       - build:
-#           context: org-master
-#           filters:
-#             branches:
-#               only:
-#                 - master
-#   create_beta_package:
-#     jobs:
-#       - create-beta-package:
-#           context: org-preproduction
-#           filters:
-#             branches:
-#               only:
-#                 - pre-production
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build:
+          context: org-master
+          filters:
+            branches:
+              only:
+                - master
+  create_beta_package:
+    jobs:
+      - create-beta-package:
+          context: org-preproduction
+          filters:
+            branches:
+              only:
+                - master
 #END-OF-CONFIG-FILE#
