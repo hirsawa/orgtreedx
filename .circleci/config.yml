@@ -16,6 +16,8 @@ jobs:
       # from https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli_standalone.htm
       # and https://developer.salesforce.com/media/salesforce-cli/manifest.json
       - DX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+      - SV_PACKAGE_VERSION_ID: 04t10000000r5i4
+      - SV_INSTALL_KEY: sb201902
     steps:
       - checkout
       - run:
@@ -60,7 +62,7 @@ jobs:
             sfdx force:user:create --setalias admin-user profileName=システム管理者
             sfdx force:user:password:generate --targetusername admin-user
             sfdx force:user:display --targetusername admin-user
-            sfdx force:package:install --package $SV_PACKAGE_ID  --installationkey sb201902 --securitytype AllUsers
+            sfdx force:package:install --package $SV_PACKAGE_VERSION_ID --installationkey $SV_INSTALL_KEY --securitytype AllUsers
             sfdx force:source:push -u circle_build_test
       - run:
           name: Run Apex Tests
@@ -76,193 +78,73 @@ jobs:
           command: |
             # sfdx force:org:delete -u circle_build_$CIRCLE_BUILD_NUM -p
             sfdx force:org:delete -u circle_build_test -p
-      # - PACKAGE_NAME:         "SmartVisca"                 # Name of your managed package
-      # - PACKAGE_VERSION_NAME: "June 2020"                 # Version Name for your managed package
-      # - METADATA_PACKAGE_ID:  "033100000009kIu"            # Metadata Package ID (always begins with 033)
-# 以降 人事異動のやつを丸々コピー
-# ####################################################################################################
-# ## JOB:     create-dev-scratch-org
-# ## PURPOSE:
-# ####################################################################################################
-#   create-dev-scratch-org:
-#     machine: true
-#     working_directory: ~/ci_app
-#     environment:
-#       # from https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli_standalone.htm
-#       # and https://developer.salesforce.com/media/salesforce-cli/manifest.json
-#       - DX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
-#     steps:
-#       - checkout
-#       - run:
-#           name: File List
-#           command: |
-#             ls -l -R
-#             df -hT
-#       - run:
-#           name: Download CLI
-#           command: |
-#             mkdir sfdx
-#             wget -qO- $DX_CLI_URL | tar xJ -C sfdx --strip-components 1
-#       - run:
-#           name: Install CLI
-#           command: |
-#             ./sfdx/install
-#             sfdx
-#             mkdir tmp
-#       - run:
-#           name: Create hub key
-#           command: |
-#             echo 'make hub key'
-#             #openssl enc -nosalt -aes-256-cbc -d -in assets/server_ohno_dev.key.enc -out assets/server_devhub.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
-#             openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server_devhub.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
-#       - run:
-#           name: Setup Org
-#           command: |
-#             echo 'Running SetupOrg'
-#             openssl rsa -noout -modulus -in assets/server_devhub.key
-#             # sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server_devhub.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
-#             # sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server_devhub.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
-#             # sfdx force:auth:jwt:grant --clientid 3MVG9n_HvETGhr3BSA_rzJBE7UnubYcnun6IqJaQK5cW.Q.seiY8e1XnleHnDE1deUiNWrLYyQivBRwE8CchW --jwtkeyfile assets/server.key --username aohno+dev@sunbridge.com --setdefaultdevhubusername -a DevHub
-#             sfdx force:auth:jwt:grant --clientid 3MVG9I1kFE5Iul2AxgqH8sVAv8V3z3d8PQSibM719F4EuLdP2VQJiuyeq_RF6Edb2DNOjrPQVYwCksTkkesPh --jwtkeyfile assets/server_devhub.key --username aohno@partner.sunbridge.com --setdefaultdevhubusername -a DevHub
-#             sfdx force --help
-#             sfdx force:org:list
-#             sfdx force:limits:api:display -u DevHub
-#             sfdx force:data:soql:query -q "SELECT Name,OrgName,ScratchOrg,Description FROM ScratchOrgInfo WHERE status = 'Active' AND OrgName = '$CIRCLE_BRANCH'" -u DevHub | wc -l > scratchorg.cnt
-#             cat scratchorg.cnt
-#             SCRATCH_CNT=$(cat scratchorg.cnt)
-#             echo "scratch:count=${SCRATCH_CNT}"
-#             echo "'$CIRCLE_BRANCH'"
-#             echo "${CIRCLE_BRANCH}"
-#             if [ "${SCRATCH_CNT}" = "1" ]; then
-#                 # sfdx force:org:create -s -f ~/ci_app/config/project-scratch-def.json -a circle_build_$CIRCLE_BUILD_NUM --wait 3
-#                 sfdx force:org:create orgName=$CIRCLE_BRANCH edition=Developer -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
-#                 #sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
-#                 sfdx force:source:push -u dev_scratch_org_$CIRCLE_BUILD_NUM
-#                 sfdx force:user:list
-#                 #sfdx force:user:create --setalias dev-user  --definitionfile config/user-def.json
-#                 #sfdx force:user:list
-#                 sfdx force:user:display --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
-#                 sfdx force:user:password:generate --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
-#                 sfdx force:user:display --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
-#             else
-#                 echo "ScrachOrg already exists."
-#             fi
 
-#       - run:
-#           name: Setup Org User
-#           command: |
-#             echo 'Running SetupOrgUser'
+### Uncomment the following if performing deployments
+#deployment:
+#  override:
+#    - sfdx force:source:convert -r force-app -d testDeploy
+#    - . cleanupDeploy.sh
+#    - sfdx force:mdapi:deploy -d testDeploy/ -u deploy -w 2
+####################################################################################################
+## JOB:     create-beta-package
+## PURPOSE: Deploys successfully built and tested code to the packaging org so it can be prepped
+##          for a new BETA package version upload.
+####################################################################################################
+  create-beta-package:
+    docker:
+      - image: ncino/ci-sfdx
+    environment:
+      - PACKAGE_NAME:         "OrgTreeDX"                      # Name of your managed package
+      - PACKAGE_VERSION_NAME: "June 2020"                 # Version Name for your managed package
+      - METADATA_PACKAGE_ID:  "0337F000000l0TYQAY"            # パッケージ ID Metadata Package ID (always begins with 033)
+    steps:
+      - checkout                  # Required step.  Checks out the code from your repository.
+      - attach_workspace:
+          at: /tmp/sfdx-keys      # Attaches the workspace where our private key files were stored.
+      - run:
+          name: Display version info for the Salesforce CLI and core plugins (will force updates if needed)
+          command: |
+            sfdx version          # Output the version of the CLI
+            sfdx plugins --core   # Output the version of the core plugins
+      - run:
+          name: Authenticate the Salesforce CLI to the Packaging Org using JWT
+          command: |
+            sfdx force:auth:jwt:grant -i 3MVG9G9pzCUSkzZu6eE1LwJ4a6ucKQW3nDxLTUqCMvOd8u2hkBIV.EVTfUMJb26cEzZoDnaWOzeFUYBwrKWQU \
+                                      -f /tmp/sfdx-keys/pkg-org.key \
+                                      -u $PKGORG_SFDC_USERNAME \
+                                      -d \
+                                      -a PkgOrg
+      - run:
+          name: List current version history for the first-generation package about to be uploaded
+          command: |
+            #### List version info for all first-gen packages
+            ## sfdx force:package1:version:list
+            # -u --TARGETUSERNAME           Optional. A username or alias for the target org. Overrides the default target org.
+            # -i --PACKAGEID                Optional. ID of the metadata package (starts with 033) we want version info from.
+            #    --LOGLEVEL                 Optional. The logging level for this command invocation.
+            sfdx force:package1:version:list  -u PkgOrg \
+                                              -i $METADATA_PACKAGE_ID \
+                                              --loglevel error
+      - run:
+          name: Create (upload) a new MANAGED BETA package version
+          command: |
+            sfdx force:package1:version:create  -i $METADATA_PACKAGE_ID \
+                                                -n "$PACKAGE_VERSION_NAME" \
+                                                -d "Package version generated by CI process" \
+                                                -u PkgOrg \
+                                                -w 15 \
+                                                --loglevel error
+      # Store SFDX logs as artifacts
+      - store_artifacts:
+          path: ~/.sfdx/sfdx.log
+          destination: sfdx-logs
 
-# ### Uncomment the following if performing deployments
-# #deployment:
-# #  override:
-# #    - sfdx force:source:convert -r force-app -d testDeploy
-# #    - . cleanupDeploy.sh
-# #    - sfdx force:mdapi:deploy -d testDeploy/ -u deploy -w 2
-# ####################################################################################################
-# ## JOB:     create-beta-package
-# ## PURPOSE: Deploys successfully built and tested code to the packaging org so it can be prepped
-# ##          for a new BETA package version upload.
-# ####################################################################################################
-#   create-beta-package:
-#     docker:
-#       - image: ncino/ci-sfdx
-#     environment:
-#       - PACKAGE_NAME:         "SmartVisca"                 # Name of your managed package
-#       - PACKAGE_VERSION_NAME: "June 2020"                 # Version Name for your managed package
-#       - METADATA_PACKAGE_ID:  "033100000009kIu"            # Metadata Package ID (always begins with 033)
-
-#       #- PACKAGE_NAME:         "pVisca"                      # Name of your managed package
-#       #- PACKAGE_VERSION_NAME: "April 2020"                 # Version Name for your managed package
-#       #- METADATA_PACKAGE_ID:  "0332v000000W2qGAAS"            # Metadata Package ID (always begins with 033)
-#       - PACKAGE_DIRECTORY:    "sfdx-source/SmartViscaf"  # SFDX package directory that has your code
-#     steps:
-#       - checkout                  # Required step.  Checks out the code from your repository.
-#       - run:
-#           name: File List
-#           command: |
-#             ls -l -R
-#             df -hT
-#       - run:
-#           name: File Remeve(profiles,permissionsets)
-#           command: |
-#             rm -rf ./sfdx-source/pVisca/main/default/profiles
-#             rm -rf ./sfdx-source/pVisca/main/default/permissionsets
-#       - run:
-#           name: File List(alter remove)
-#           command: |
-#             ls -l -R
-#             df -hT
-#       - run:
-#           name: Display version info for the Salesforce CLI and core plugins (will force updates if needed)
-#           command: |
-#             sfdx version          # Output the version of the CLI
-#             sfdx plugins --core   # Output the version of the core plugins
-#       - run:
-#           name: Create Package Org key
-#           command: |
-#             echo 'make package org key'
-#             openssl enc -nosalt -aes-256-cbc -d -in assets/server_package.key.enc -out assets/server_package.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
-#       - run:
-#           name: Authenticate the Salesforce CLI to the Packaging Org using JWT
-#           command: |
-#             sfdx force:auth:jwt:grant -i $HUB_CONSUMER_KEY \
-#                                       -f assets/server_package.key \
-#                                       -u circleci@sunbridge.com.svjx \
-#                                       -d \
-#                                       -a PkgOrg
-#       - run:
-#           name: Convert SFDX source to MDAPI source
-#           command: |
-#             sfdx force:source:convert -r "$PACKAGE_DIRECTORY" \
-#                                       -d "./mdapi-source/circle_build_$CIRCLE_BUILD_NUM" \
-#                                       -n "$PACKAGE_NAME"
-#       - run:
-#           name: Deploy MDAPI Source to the Packaging Org
-#           command: |
-#             sfdx force:mdapi:deploy -d "./mdapi-source/circle_build_$CIRCLE_BUILD_NUM" \
-#                                     -l RunLocalTests \
-#                                     -u PkgOrg \
-#                                     -w 15 \
-#                                     --verbose
-#       - run:
-#           name: List current version history for the first-generation package about to be uploaded
-#           command: |
-#             #### List version info for all first-gen packages
-#             ## sfdx force:package1:version:list
-#             # -u --TARGETUSERNAME           Optional. A username or alias for the target org. Overrides the default target org.
-#             # -i --PACKAGEID                Optional. ID of the metadata package (starts with 033) we want version info from.
-#             #    --LOGLEVEL                 Optional. The logging level for this command invocation.
-#             sfdx force:package1:version:list  -u PkgOrg \
-#                                               -i $METADATA_PACKAGE_ID
-#       - run:
-#           name: Create (upload) a new MANAGED BETA package version
-#           command: |
-#             sfdx force:package1:version:create  -i $METADATA_PACKAGE_ID \
-#                                                 -n "$PACKAGE_VERSION_NAME" \
-#                                                 -d "Package version generated by CI process" \
-#                                                 -u PkgOrg \
-#                                                 -w 15
-#       # Store SFDX logs as artifacts
-#       - store_artifacts:
-#           path: ~/.sfdx/sfdx.log
-#           destination: sfdx-logs
-
-# ####################################################################################################
-# ## WORKFLOW:  build_and_test
-# ## PURPOSE:   Primary workflow used by the CI process.
-# ##          context: org-global
-# ####################################################################################################
+####################################################################################################
+## WORKFLOW:  build_and_test
+## PURPOSE:   Primary workflow used by the CI process.
+####################################################################################################
 # workflows:
 #   version: 2
-#   create_dev_scratch_org:
-#     jobs:
-#       - create-dev-scratch-org:
-#           context: org-sbdevhub
-#           filters:
-#             branches:
-#               only:
-#                 - /feature.*/
 #   build_and_test:
 #     jobs:
 #       - build:
@@ -279,3 +161,4 @@ jobs:
 #             branches:
 #               only:
 #                 - pre-production
+#END-OF-CONFIG-FILE#
