@@ -150,7 +150,7 @@ workflows:
   build_and_test:
     jobs:
       - build:
-          context: org-master
+          # context: org-master
           filters:
             branches:
               only:
@@ -158,9 +158,9 @@ workflows:
   create_beta_package:
     jobs:
       - create-beta-package:
-          context: org-preproduction
+          # context: org-preproduction
           filters:
             branches:
               only:
-                - master
+                - develope
 #END-OF-CONFIG-FILE#
