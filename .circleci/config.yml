@@ -155,7 +155,7 @@ workflows:
           filters:
             branches:
               only:
-                - /feature/*
+                - /feature.*/
   # build_and_test:
   #   jobs:
   #     - build:
