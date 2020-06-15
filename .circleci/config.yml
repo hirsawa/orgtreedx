@@ -154,7 +154,7 @@ workflows:
           filters:
             branches:
               only:
-                - develope
+                - master
   create_beta_package:
     jobs:
       - create-beta-package:
@@ -162,5 +162,5 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - develope
 #END-OF-CONFIG-FILE#
