@@ -147,14 +147,23 @@ jobs:
 ####################################################################################################
 workflows:
   version: 2
-  build_and_test:
+  create_dev_scratch_org:
     jobs:
+      # - create-dev-scratch-org:
+          # context: org-sbdevhub
       - build:
-          # context: org-master
           filters:
             branches:
               only:
-                - master
+                - /feature/*
+  # build_and_test:
+  #   jobs:
+  #     - build:
+  #         # context: org-master
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
   create_beta_package:
     jobs:
       - create-beta-package:
@@ -162,5 +171,5 @@ workflows:
           filters:
             branches:
               only:
-                - develope
+                - pre-production
 #END-OF-CONFIG-FILE#
