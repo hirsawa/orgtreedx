@@ -71,10 +71,11 @@ jobs:
           command: |
             echo 'Running Apex Tests'
             # sfdx force:user:permset:assign --permsetname SmartViscaCITestUser
-            mkdir -p ~/test-results/junit
-            sfdx force:apex:test:run -c -d ~/test-results/junit -r junit --wait 5
+            mkdir -p ~/junit
+            sfdx force:apex:test:run -c -d ~/junit -r junit --wait 5
       - store_test_results:
-          path: ~/test-results
+          path: ~/junit
+
       - run:
           name: Delete Useless Scratch Org
           command: |
