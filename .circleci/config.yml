@@ -82,8 +82,8 @@ jobs:
             # sfdx force:org:delete -u circle_build_$CIRCLE_BUILD_NUM -p
             sfdx force:org:delete -u circle_build_test -p
             curl -X POST -H 'Content-type: application/json' \
-                --data '{"channel": "test", \
-                "text": "${CIRCLE_PROJECT_REPONAME}の${CIRCLE_WORKFLOW_ID}の完了"}' \
+                --data "{ 'channel': 'test', \
+                'text': '${CIRCLE_PROJECT_REPONAME}の${CIRCLE_WORKFLOW_ID}の完了' }" \
                 ${SLACK_WEBHOOK}
 
 ####################################################################################################
@@ -122,7 +122,8 @@ jobs:
           command: |
             echo 'make hub key'
             #openssl enc -nosalt -aes-256-cbc -d -in assets/server_ohno_dev.key.enc -out assets/server_devhub.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
-            openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server_devhub.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
+            openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
+
       - run:
           name: Setup Org
           command: |
@@ -131,7 +132,7 @@ jobs:
             # sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server_devhub.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
             # sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server_devhub.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
             # sfdx force:auth:jwt:grant --clientid 3MVG9n_HvETGhr3BSA_rzJBE7UnubYcnun6IqJaQK5cW.Q.seiY8e1XnleHnDE1deUiNWrLYyQivBRwE8CchW --jwtkeyfile assets/server.key --username aohno+dev@sunbridge.com --setdefaultdevhubusername -a DevHub
-            sfdx force:auth:jwt:grant --clientid 3MVG9I1kFE5Iul2AxgqH8sVAv8V3z3d8PQSibM719F4EuLdP2VQJiuyeq_RF6Edb2DNOjrPQVYwCksTkkesPh --jwtkeyfile assets/server_devhub.key --username aohno@partner.sunbridge.com --setdefaultdevhubusername -a DevHub
+            sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
             sfdx force --help
             sfdx force:org:list
             sfdx force:limits:api:display -u DevHub
