@@ -86,6 +86,79 @@ jobs:
                 '${CIRCLE_PROJECT_REPONAME}の${CIRCLE_WORKFLOW_ID}の完了'}" \
                 ${SLACK_WEBHOOK}
 
+####################################################################################################
+## JOB:     create-dev-scratch-org
+## PURPOSE:
+####################################################################################################
+  create-dev-scratch-org:
+    machine: true
+    working_directory: ~/ci_app
+    environment:
+      # from https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli_standalone.htm
+      # and https://developer.salesforce.com/media/salesforce-cli/manifest.json
+      - DX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+    steps:
+      - checkout
+      - run:
+          name: File List
+          command: |
+            ls -l -R
+            df -hT
+      - run:
+          name: Download CLI
+          command: |
+            mkdir sfdx
+            wget -qO- $DX_CLI_URL | tar xJ -C sfdx --strip-components 1
+      - run:
+          name: Install CLI
+          command: |
+            ./sfdx/install
+            sfdx
+            mkdir tmp
+      - run:
+          name: Create hub key
+          command: |
+            echo 'make hub key'
+            #openssl enc -nosalt -aes-256-cbc -d -in assets/server_ohno_dev.key.enc -out assets/server_devhub.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
+            openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server_devhub.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
+      - run:
+          name: Setup Org
+          command: |
+            echo 'Running SetupOrg'
+            openssl rsa -noout -modulus -in assets/server_devhub.key
+            # sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server_devhub.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
+            # sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server_devhub.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
+            # sfdx force:auth:jwt:grant --clientid 3MVG9n_HvETGhr3BSA_rzJBE7UnubYcnun6IqJaQK5cW.Q.seiY8e1XnleHnDE1deUiNWrLYyQivBRwE8CchW --jwtkeyfile assets/server.key --username aohno+dev@sunbridge.com --setdefaultdevhubusername -a DevHub
+            sfdx force:auth:jwt:grant --clientid 3MVG9I1kFE5Iul2AxgqH8sVAv8V3z3d8PQSibM719F4EuLdP2VQJiuyeq_RF6Edb2DNOjrPQVYwCksTkkesPh --jwtkeyfile assets/server_devhub.key --username aohno@partner.sunbridge.com --setdefaultdevhubusername -a DevHub
+            sfdx force --help
+            sfdx force:org:list
+            sfdx force:limits:api:display -u DevHub
+            sfdx force:data:soql:query -q "SELECT Name,OrgName,ScratchOrg,Description FROM ScratchOrgInfo WHERE status = 'Active' AND OrgName = '$CIRCLE_BRANCH'" -u DevHub | wc -l > scratchorg.cnt
+            cat scratchorg.cnt
+            SCRATCH_CNT=$(cat scratchorg.cnt)
+            echo "scratch:count=${SCRATCH_CNT}"
+            echo "'$CIRCLE_BRANCH'"
+            echo "${CIRCLE_BRANCH}"
+            if [ "${SCRATCH_CNT}" = "1" ]; then
+                # sfdx force:org:create -s -f ~/ci_app/config/project-scratch-def.json -a circle_build_$CIRCLE_BUILD_NUM --wait 3
+                sfdx force:org:create orgName=$CIRCLE_BRANCH edition=Developer -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
+                #sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
+                sfdx force:source:push -u dev_scratch_org_$CIRCLE_BUILD_NUM
+                sfdx force:user:list
+                #sfdx force:user:create --setalias dev-user  --definitionfile config/user-def.json
+                #sfdx force:user:list
+                sfdx force:user:display --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
+                sfdx force:user:password:generate --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
+                sfdx force:user:display --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
+            else
+                echo "ScrachOrg already exists."
+            fi
+
+      - run:
+          name: Setup Org User
+          command: |
+            echo 'Running SetupOrgUser'
+
 ### Uncomment the following if performing deployments
 #deployment:
 #  override:
@@ -154,7 +227,7 @@ workflows:
   version: 2
   create_dev_scratch_org:
     jobs:
-      # - create-dev-scratch-org:
+      - create-dev-scratch-org:
           # context: org-sbdevhub
           filters:
             branches:
