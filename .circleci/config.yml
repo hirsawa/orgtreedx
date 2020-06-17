@@ -80,6 +80,10 @@ jobs:
           command: |
             # sfdx force:org:delete -u circle_build_$CIRCLE_BUILD_NUM -p
             sfdx force:org:delete -u circle_build_test -p
+            curl -X POST -H 'Content-type: application/json' \
+                --data "{'text': \
+                '${CIRCLE_PROJECT_REPONAME}の${CIRCLE_WORKFLOW_ID}の完了'}" \
+                ${SLACK_WEBHOOK}
 
 ### Uncomment the following if performing deployments
 #deployment:
@@ -147,6 +151,14 @@ jobs:
 ####################################################################################################
 workflows:
   version: 2
+  create_dev_scratch_org:
+    jobs:
+      # - create-dev-scratch-org:
+          # context: org-sbdevhub
+          filters:
+            branches:
+              only:
+                - /feature.*/
   build_and_test:
     jobs:
       - build:
@@ -162,5 +174,5 @@ workflows:
           filters:
             branches:
               only:
-                - develope
+                - pre-production
 #END-OF-CONFIG-FILE#
