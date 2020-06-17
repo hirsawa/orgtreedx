@@ -84,8 +84,7 @@ jobs:
             curl -X POST -H 'Content-type: application/json' \
                 --data '{ \
                   "channel": "test", \
-                  "text": "${CIRCLE_PROJECT_REPONAME}の${CIRCLE_WORKFLOW_ID}の完了" \
-                }' \
+                  "text": "${CIRCLE_PROJECT_REPONAME}の${CIRCLE_WORKFLOW_ID}の完了" }' \
                 ${SLACK_WEBHOOK}
 
 ####################################################################################################
