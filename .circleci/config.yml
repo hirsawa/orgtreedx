@@ -147,12 +147,17 @@ jobs:
                 sfdx force:org:create orgName=$CIRCLE_BRANCH edition=Developer -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
                 #sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
                 sfdx force:source:push -u dev_scratch_org_$CIRCLE_BUILD_NUM
-                sfdx force:user:list
-                #sfdx force:user:create --setalias dev-user  --definitionfile config/user-def.json
-                #sfdx force:user:list
-                sfdx force:user:display --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
-                sfdx force:user:password:generate --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
-                sfdx force:user:display --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
+                # sfdx force:user:list
+                # #sfdx force:user:create --setalias dev-user  --definitionfile config/user-def.json
+                # #sfdx force:user:list
+                # sfdx force:user:display --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
+                # sfdx force:user:password:generate --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
+                # sfdx force:user:display --targetusername dev_scratch_org_$CIRCLE_BUILD_NUM
+
+                sfdx force:user:create --setalias admin-user profileName=システム管理者
+                sfdx force:user:password:generate --targetusername admin-user
+                sfdx force:user:display --targetusername admin-user
+
             else
                 echo "ScrachOrg already exists."
             fi
