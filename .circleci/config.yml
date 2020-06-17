@@ -128,7 +128,7 @@ jobs:
           name: Setup Org
           command: |
             echo 'Running SetupOrg'
-            openssl rsa -noout -modulus -in assets/server_devhub.key
+            # openssl rsa -noout -modulus -in assets/server_devhub.key
             # sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server_devhub.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
             # sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server_devhub.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
             # sfdx force:auth:jwt:grant --clientid 3MVG9n_HvETGhr3BSA_rzJBE7UnubYcnun6IqJaQK5cW.Q.seiY8e1XnleHnDE1deUiNWrLYyQivBRwE8CchW --jwtkeyfile assets/server.key --username aohno+dev@sunbridge.com --setdefaultdevhubusername -a DevHub
