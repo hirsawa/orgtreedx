@@ -233,11 +233,13 @@ jobs:
             # -u --USERNAME                 Required. The authentication username.
             # -d --SETDEFAULTDEVHUBUSERNAME Optional. Sets the authenticated org as the default Dev Hub org for scratch org creation.
             # -a --SETALIAS                 Optional. Sets an alias for the authenticated org.
-            sfdx force:auth:jwt:grant -i $PKGORG_CONSUMER_KEY \
-                                      -f assets/server.key \
-                                      -u $PKGORG_SFDC_USERNAME \
-                                      -d \
-                                      -a PkgOrg
+            # sfdx force:auth:jwt:grant -i $PKGORG_CONSUMER_KEY \
+            #                           -f assets/server.key \
+            #                           -u $PKGORG_SFDC_USERNAME \
+            #                           -d \
+            #                           -a PkgOrg
+            sfdx force:auth:jwt:grant --clientid $PKGORG_CONSUMER_KEY --jwtkeyfile assets/server.key --username $PKGORG_SFDC_USERNAME --setdefaultdevhubusername -a PkgOrg
+
       - run:
           name: Convert SFDX source to MDAPI source
           command: |
