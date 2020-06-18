@@ -238,8 +238,8 @@ jobs:
             #                           -u $PKGORG_SFDC_USERNAME \
             #                           -d \
             #                           -a PkgOrg
-            sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
-            sfdx force:auth:jwt:grant --clientid $PKGORG_CONSUMER_KEY --jwtkeyfile assets/server.key --username $PKGORG_SFDC_USERNAME --setdefaultdevhubusername -a PkgOrg
+            # sfdx force:auth:jwt:grant --clientid $HUB_CONSUMER_KEY --jwtkeyfile assets/server.key --username $HUB_SFDC_USER --setdefaultdevhubusername -a DevHub
+            sfdx force:auth:jwt:grant --clientid "$PKGORG_CONSUMER_KEY" --jwtkeyfile "assets/server.key" --username "$PKGORG_SFDC_USERNAME" --setdefaultdevhubusername -a PkgOrg
 
       - run:
           name: Convert SFDX source to MDAPI source
