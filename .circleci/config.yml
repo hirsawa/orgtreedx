@@ -125,7 +125,6 @@ jobs:
             echo 'make hub key'
             #openssl enc -nosalt -aes-256-cbc -d -in assets/server_ohno_dev.key.enc -out assets/server_devhub.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
             openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
-
       - run:
           name: Setup Org
           command: |
@@ -214,6 +213,11 @@ jobs:
             ./sfdx/install
             sfdx
             mkdir tmp
+      - run:
+          name: Create Connected App key
+          command: |
+            echo 'make app key'
+            openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
       - run:
           name: Display version info for the Salesforce CLI and core plugins (will force updates if needed)
           command: |
