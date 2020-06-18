@@ -146,7 +146,7 @@ jobs:
             echo "${CIRCLE_BRANCH}"
             if [ "${SCRATCH_CNT}" = "1" ]; then
                 # sfdx force:org:create -s -f ~/ci_app/config/project-scratch-def.json -a circle_build_$CIRCLE_BUILD_NUM --wait 3
-                sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json orgName=$CIRCLE_BRANCH edition=Developer -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
+                sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json orgName=$CIRCLE_BRANCH -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
                 #sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
                 sfdx force:package:install --package $SV_PACKAGE_VERSION_ID --installationkey $SV_INSTALL_KEY --securitytype AllUsers --wait 6 -u dev_scratch_org_$CIRCLE_BUILD_NUM
                 sfdx force:source:push -u dev_scratch_org_$CIRCLE_BUILD_NUM
@@ -180,17 +180,40 @@ jobs:
 ## PURPOSE: Deploys successfully built and tested code to the packaging org so it can be prepped
 ##          for a new BETA package version upload.
 ####################################################################################################
-  create-beta-package:
+  create-dev-scratch-org:
     docker:
       - image: ncino/ci-sfdx
+    # machine: true
+    working_directory: ~/ci_app
     environment:
+      # from https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli_standalone.htm
+      # and https://developer.salesforce.com/media/salesforce-cli/manifest.json
+      - DX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+      - SV_PACKAGE_VERSION_ID: 04t10000000r5i4AAA   # SV 2.0.4
+      - SV_INSTALL_KEY: sb201902
       - PACKAGE_NAME:         "OrgTreeDX"                      # Name of your managed package
       - PACKAGE_VERSION_NAME: "June 2020"                 # Version Name for your managed package
       - METADATA_PACKAGE_ID:  "0337F000000l0TYQAY"            # パッケージ ID Metadata Package ID (always begins with 033)
+      - PKGORG_CONSUMER_KEY:  "3MVG9d8..z.hDcPKBgjW8kzCacTVVugSNMajGtCZmwF_rf4SDo8w3JXoEusjgpIjhZBfRjIjwPL9ic4SeYWFA"
+      - PKGORG_SFDC_USERNAME: "hsawano@sunbridge.ot.01"  #
     steps:
-      - checkout                  # Required step.  Checks out the code from your repository.
-      - attach_workspace:
-          at: /tmp/sfdx-keys      # Attaches the workspace where our private key files were stored.
+      - checkout
+      - run:
+          name: File List
+          command: |
+            ls -l -R
+            df -hT
+      - run:
+          name: Download CLI
+          command: |
+            mkdir sfdx
+            wget -qO- $DX_CLI_URL | tar xJ -C sfdx --strip-components 1
+      - run:
+          name: Install CLI
+          command: |
+            ./sfdx/install
+            sfdx
+            mkdir tmp
       - run:
           name: Display version info for the Salesforce CLI and core plugins (will force updates if needed)
           command: |
@@ -199,11 +222,48 @@ jobs:
       - run:
           name: Authenticate the Salesforce CLI to the Packaging Org using JWT
           command: |
-            sfdx force:auth:jwt:grant -i 3MVG9G9pzCUSkzZu6eE1LwJ4a6ucKQW3nDxLTUqCMvOd8u2hkBIV.EVTfUMJb26cEzZoDnaWOzeFUYBwrKWQU \
+            #### Use the pkg-org.key that was created by the setup-build-environment job
+            ## sfdx force:auth:jwt:grant
+            # -i --CLIENTID                 Required. The OAuth client ID (sometimes referred to as the consumer key)
+            # -f --JWTKEYFILE               Required. Path to a file containing the private key
+            # -u --USERNAME                 Required. The authentication username.
+            # -d --SETDEFAULTDEVHUBUSERNAME Optional. Sets the authenticated org as the default Dev Hub org for scratch org creation.
+            # -a --SETALIAS                 Optional. Sets an alias for the authenticated org.
+            sfdx force:auth:jwt:grant -i $PKGORG_CONSUMER_KEY \
                                       -f /tmp/sfdx-keys/pkg-org.key \
                                       -u $PKGORG_SFDC_USERNAME \
                                       -d \
                                       -a PkgOrg
+      - run:
+          name: Convert SFDX source to MDAPI source
+          command: |
+            #### Convert SFDX source to MDAPI source so it can be deployed to the Packaging Org
+            ## sfdx force:source:convert
+            # -r --ROOTDIR                  Optional. The directory that contains the source to convert.
+            # -d --OUTPUTDIR                Optional. The output directory to export the Metadata API source to.
+            # -n --PACKAGENAME              Optional. The name of the package to associate with the Metadata API source.
+            #    --LOGLEVEL                 Optional. The logging level for this command invocation.
+            sfdx force:source:convert -r "$PACKAGE_DIRECTORY" \
+                                      -d "./mdapi-source/circle_build_$CIRCLE_BUILD_NUM" \
+                                      -n "$PACKAGE_NAME" \
+                                      --loglevel error
+      - run:
+          name: Deploy MDAPI Source to the Packaging Org
+          command: |
+            #### Deploy the newly converted MDAPI Source to the Packaging Org
+            ## sfdx force:mdapi:deploy
+            # -d --DEPLOYDIR                Optional. The root of the directory tree that contains the files to deploy.
+            # -l --TESTLEVEL                Optional. Specifies which level of deployment tests to run.
+            # -u --TARGETUSERNAME           Optional. A username or alias for the target org. Overrides the default target org.
+            # -w --WAIT                     Optional. The number of minutes to wait for the command to complete. Default is –1 (no limit).
+            #    --VERBOSE                  Optional. Indicates that you want verbose output from the deploy operation.
+            #    --LOGLEVEL                 Optional. The logging level for this command invocation.
+            sfdx force:mdapi:deploy -d "./mdapi-source/circle_build_$CIRCLE_BUILD_NUM" \
+                                    -l RunLocalTests \
+                                    -u PkgOrg \
+                                    -w 15 \
+                                    --verbose \
+                                    --loglevel error
       - run:
           name: List current version history for the first-generation package about to be uploaded
           command: |
@@ -218,12 +278,21 @@ jobs:
       - run:
           name: Create (upload) a new MANAGED BETA package version
           command: |
+            #### Create a new MANAGED BETA package version
+            ## sfdx force:package1:version:create
+            # -i --PACKAGEID                Required. ID of the metadata package (starts with 033) of which you’re creating a new version.
+            # -n --NAME                     Required. Package version name.
+            # -d --DESCRIPTION              Optional. Package version description.
+            # -u --TARGETUSERNAME           Optional. A username or alias for the target org. Overrides the default target org.
+            # -w --WAIT                     Optional. The number of minutes to wait for the command to complete. Default is –1 (no limit).
+            #    --LOGLEVEL                 Optional. The logging level for this command invocation.
             sfdx force:package1:version:create  -i $METADATA_PACKAGE_ID \
                                                 -n "$PACKAGE_VERSION_NAME" \
                                                 -d "Package version generated by CI process" \
                                                 -u PkgOrg \
                                                 -w 15 \
                                                 --loglevel error
+
       # Store SFDX logs as artifacts
       - store_artifacts:
           path: ~/.sfdx/sfdx.log
@@ -256,7 +325,7 @@ workflows:
       - create-beta-package:
           # context: org-preproduction
           filters:
-            branches:
+            tags:
               only:
-                - pre-production
+                - /v.*/
 #END-OF-CONFIG-FILE#
