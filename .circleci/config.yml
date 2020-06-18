@@ -180,7 +180,7 @@ jobs:
 ## PURPOSE: Deploys successfully built and tested code to the packaging org so it can be prepped
 ##          for a new BETA package version upload.
 ####################################################################################################
-  create-dev-scratch-org:
+  create-beta-package:
     docker:
       - image: ncino/ci-sfdx
     # machine: true
@@ -191,11 +191,11 @@ jobs:
       - DX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
       - SV_PACKAGE_VERSION_ID: 04t10000000r5i4AAA   # SV 2.0.4
       - SV_INSTALL_KEY: sb201902
-      - PACKAGE_NAME:         "OrgTreeDX"                      # Name of your managed package
-      - PACKAGE_VERSION_NAME: "June 2020"                 # Version Name for your managed package
-      - METADATA_PACKAGE_ID:  "0337F000000l0TYQAY"            # パッケージ ID Metadata Package ID (always begins with 033)
-      - PKGORG_CONSUMER_KEY:  "3MVG9d8..z.hDcPKBgjW8kzCacTVVugSNMajGtCZmwF_rf4SDo8w3JXoEusjgpIjhZBfRjIjwPL9ic4SeYWFA"
-      - PKGORG_SFDC_USERNAME: "hsawano@sunbridge.ot.01"  #
+      - PACKAGE_NAME:         OrgTreeDX                      # Name of your managed package
+      - PACKAGE_VERSION_NAME: June 2020                 # Version Name for your managed package
+      - METADATA_PACKAGE_ID:  0337F000000l0TYQAY            # パッケージ ID Metadata Package ID (always begins with 033)
+      - PKGORG_CONSUMER_KEY:  3MVG9d8..z.hDcPKBgjW8kzCacTVVugSNMajGtCZmwF_rf4SDo8w3JXoEusjgpIjhZBfRjIjwPL9ic4SeYWFA
+      - PKGORG_SFDC_USERNAME: hsawano@sunbridge.ot.01  #
     steps:
       - checkout
       - run:
