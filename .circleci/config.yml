@@ -162,7 +162,7 @@ jobs:
             else
                 echo "ScrachOrg already exists."
             fi
-
+            sfdx force:user:display --targetusername admin-user
       - run:
           name: Setup Org User
           command: |
