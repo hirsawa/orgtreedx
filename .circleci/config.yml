@@ -144,7 +144,7 @@ jobs:
             echo "${CIRCLE_BRANCH}"
             if [ "${SCRATCH_CNT}" = "1" ]; then
                 # sfdx force:org:create -s -f ~/ci_app/config/project-scratch-def.json -a circle_build_$CIRCLE_BUILD_NUM --wait 3
-                sfdx force:org:create orgName=$CIRCLE_BRANCH edition=Developer -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
+                sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json orgName=$CIRCLE_BRANCH edition=Developer -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
                 #sfdx force:org:create -f ~/ci_app/config/project-scratch-def.json -a dev_scratch_org_$CIRCLE_BUILD_NUM -s -d 30 --wait 5
                 sfdx force:source:push -u dev_scratch_org_$CIRCLE_BUILD_NUM
                 # sfdx force:user:list
