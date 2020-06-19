@@ -312,22 +312,22 @@ jobs:
 ####################################################################################################
 workflows:
   version: 2
-  # create_dev_scratch_org:
-  #   jobs:
-  #     - create-dev-scratch-org:
-  #         # context: org-sbdevhub
-  #         filters:
-  #           branches:
-  #             only:
-  #               - /feature.*/
-  # build_and_test:
-  #   jobs:
-  #     - build:
-  #         # context: org-master
-  #         filters:
-  #           branches:
-  #             only:
-  #               - master
+  create_dev_scratch_org:
+    jobs:
+      - create-dev-scratch-org:
+          # context: org-sbdevhub
+          filters:
+            branches:
+              only:
+                - /feature.*/
+  build_and_test:
+    jobs:
+      - build:
+          # context: org-master
+          filters:
+            branches:
+              only:
+                - master
   create_beta_package:
     jobs:
       - create-beta-package:
