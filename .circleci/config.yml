@@ -23,26 +23,21 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Display version info for the Salesforce CLI and core plugins (will force updates if needed)
-        command: |
-          sfdx version          # Output the version of the CLI
-          sfdx plugins --core   # Output the version of the core plugins
-      # - run:
-      #     name: File List
-      #     command: |
-      #       ls -l -R
-      #       df -hT
-      # - run:
-      #     name: Download CLI
-      #     command: |
-      #       mkdir sfdx
-      #       wget -qO- $DX_CLI_URL | tar xJ -C sfdx --strip-components 1
-      # - run:
-      #     name: Install CLI
-      #     command: |
-      #       ./sfdx/install
-      #       sfdx
-      #       mkdir tmp
+          name: File List
+          command: |
+            ls -l -R
+            df -hT
+      - run:
+          name: Download CLI
+          command: |
+            mkdir sfdx
+            wget -qO- $DX_CLI_URL | tar xJ -C sfdx --strip-components 1
+      - run:
+          name: Install CLI
+          command: |
+            ./sfdx/install
+            sfdx
+            mkdir tmp
       - run:
           name: Create hub key
           command: |
@@ -317,30 +312,30 @@ jobs:
 ####################################################################################################
 workflows:
   version: 2
-  create_dev_scratch_org:
-    jobs:
-      - create-dev-scratch-org:
-          # context: org-sbdevhub
-          filters:
-            branches:
-              only:
-                - /feature.*/
-  build_and_test:
-    jobs:
-      - build:
-          # context: org-master
-          filters:
-            branches:
-              only:
-                - master
+  # create_dev_scratch_org:
+  #   jobs:
+  #     - create-dev-scratch-org:
+  #         # context: org-sbdevhub
+  #         filters:
+  #           branches:
+  #             only:
+  #               - /feature.*/
+  # build_and_test:
+  #   jobs:
+  #     - build:
+  #         # context: org-master
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
   create_beta_package:
     jobs:
       - create-beta-package:
           # context: org-preproduction
           filters:  # ブランチのない、「v」から始まるタグに対してのみ実行します。
             tags:
-              only:
-                - /v.*/
+               only:
+                 - /v.*/
             branches:
               ignore: /.*/
 #END-OF-CONFIG-FILE#
