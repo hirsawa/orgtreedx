@@ -104,21 +104,26 @@ jobs:
     steps:
       - checkout
       - run:
-          name: File List
+          name: Display version info for the Salesforce CLI and core plugins (will force updates if needed)
           command: |
-            ls -l -R
-            df -hT
-      - run:
-          name: Download CLI
-          command: |
-            mkdir sfdx
-            wget -qO- $DX_CLI_URL | tar xJ -C sfdx --strip-components 1
-      - run:
-          name: Install CLI
-          command: |
-            ./sfdx/install
-            sfdx
-            mkdir tmp
+            sfdx version          # Output the version of the CLI
+            sfdx plugins --core   # Output the version of the core plugins
+      # - run:
+      #     name: File List
+      #     command: |
+      #       ls -l -R
+      #       df -hT
+      # - run:
+      #     name: Download CLI
+      #     command: |
+      #       mkdir sfdx
+      #       wget -qO- $DX_CLI_URL | tar xJ -C sfdx --strip-components 1
+      # - run:
+      #     name: Install CLI
+      #     command: |
+      #       ./sfdx/install
+      #       sfdx
+      #       mkdir tmp
       - run:
           name: Create hub key
           command: |
