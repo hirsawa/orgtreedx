@@ -22,7 +22,7 @@ jobs:
       - SV_INSTALL_KEY: sb201902
     steps:
       - checkout
-      -run:
+      - run:
         name: Display version info for the Salesforce CLI and core plugins (will force updates if needed)
         command: |
           sfdx version          # Output the version of the CLI
